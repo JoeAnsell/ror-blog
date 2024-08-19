@@ -29,6 +29,7 @@ gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 gem "redis", ">= 4.0.1"
 
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
@@ -65,3 +66,13 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "dartsass-rails", "~> 0.5.1"
+
+# gem "tailwindcss-rails", "~> 2.7"
+
+gem "cssbundling-rails", "~> 1.4"
+
+gem "bootstrap"
+
+gem "sassc-rails"
