@@ -1,7 +1,4 @@
 // Entry point for your Sass build
-.cum {
-  border: 2px solid blue;
-}
-a {
-  border: 2px dashed red;
-}
+@import "_reset.scss";
+@import "bootstrap/scss/bootstrap";
+@import "bootstrap-icons/font/bootstrap-icons";
