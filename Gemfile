@@ -67,12 +67,7 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "dartsass-rails", "~> 0.5.1"
-
-# gem "tailwindcss-rails", "~> 2.7"
-
-gem "cssbundling-rails", "~> 1.4"
+gem "cssbundling-rails"
 
 gem "bootstrap"
 
-gem "sassc-rails"

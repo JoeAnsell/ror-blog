@@ -3,10 +3,10 @@
 Our blog has <%= Article.public_count %> articles and counting!
 
 
-<ul>
+<ul class="list-group cum">
     <% @articles.each do |article| %>
         <% unless article.archived? %>
-            <li>
+            <li class="list-group-item list-group-item-action">
                 <a href="/articles/<%= article_path(article) %>">
                     <%= link_to article.title, article %>
                 </a>
@@ -15,4 +15,4 @@ Our blog has <%= Article.public_count %> articles and counting!
     <% end %>
 </ul>
 
-<%= link_to "New Article", new_article_path %>
+<%= link_to "New Article", new_article_path,  class: "btn btn-primary"%>

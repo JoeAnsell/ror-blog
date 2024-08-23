@@ -1,0 +1,126 @@
+/* CSS Reset in SCSS */
+
+/* Box-sizing reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin and padding */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul,
+pre,
+blockquote,
+figure,
+table,
+fieldset,
+legend,
+input,
+textarea,
+button,
+th,
+td {
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove list styles */
+ol,
+ul {
+  list-style: none;
+}
+
+/* Remove text decoration and inherit color for links */
+a {
+  text-decoration: none;
+  color: inherit;
+  border: 2px solid red;
+}
+
+/* Ensure images and videos are responsive */
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Remove border from images and links */
+img,
+a {
+  border: 0;
+}
+
+/* Remove default table spacing */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Remove default form element styles */
+button,
+input,
+select,
+textarea {
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+  padding: 0;
+  margin: 0;
+}
+
+/* Ensure form elements are displayed correctly */
+button,
+input {
+  overflow: visible;
+}
+
+/* Prevent iOS and other devices from applying default button styles */
+button {
+  appearance: none;
+  background: transparent;
+}
+
+/* Remove background and border from the button */
+button:focus {
+  outline: none;
+}
+
+/* Handle the appearance of focus rings */
+:focus {
+  outline: none;
+}
+
+/* Remove the appearance of focus on input */
+input:focus {
+  outline: none;
+}
+
+/* Set a basic font family */
+body {
+  font-family: sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Remove default text selection color */
+::selection {
+  background-color: transparent;
+}
+
+/* Reset cursor for disabled elements */
+[disabled] {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.5;
+}
