@@ -71,3 +71,5 @@ gem "cssbundling-rails"
 
 gem "bootstrap"
 
+
+gem "jsbundling-rails", "~> 1.3"
