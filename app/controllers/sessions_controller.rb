@@ -1,16 +1,20 @@
 class SessionsController < ApplicationController
-
   def new
   end
 
   def create
-    user = User.find(email: params[:email])
-    if user.present? && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      redirect_to root_path, ntoice: "Successfully logged in"
+    if user = User.authenticate_by(email: params[:email], password: params[:password])
+      login user
+      redirect_to root_path, notice: "Successfully logged in"
     else
       flash[:alert] = 'Invalid email or password'
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end 
+
+
+  def destroy
+    logout current_user
+    redirect_to root_path, notice: "You have been logged out"
+  end
 end 

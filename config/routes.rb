@@ -8,16 +8,21 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  root "articles#index"
+  root "main#index"
 
 
   resources :articles do
     resources :comments
   end
 
-  get "sign_up", to: "registration#new"
-  post "sign_up", to: "reigstration#create" 
+  resource :session
+  resource :registration
+  resource :password_reset
+  resource :password
 
-  get "log_in", to: "sessions#new"
-  post "log_in", to: "sessions#create" 
+  get "sign-up", to: "registration#new"
+  post "sign-up", to: "registration#create" 
+
+  get "log-in", to: "sessions#new"
+  post "log-in", to: "sessions#create" 
 end
