@@ -25,8 +25,13 @@
           <ul class="navbar-nav gap-2">
           <% if user_signed_in? %>
             <li class="nav-item ">
+              <%= link_to "Create Article", new_article_path, class: "btn btn-outline-secondary" %>
+            </li>
+            <li class="nav-item ">
               <%= link_to "Edit Password", edit_password_path, class: "btn btn-outline-secondary" %>
-              <%= button_to "Log Out", session_path, method: :delete %>
+            </li>
+            <li class="nav-item ">
+              <%= button_to "Log Out", session_path, method: :delete, class: "btn btn-outline-secondary"%>
             </li>
           <% else %>
             <li class="nav-item ">

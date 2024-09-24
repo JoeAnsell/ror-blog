@@ -3,7 +3,7 @@
 <h3 class="mb-3">Our blog has <%= Article.public_count %> articles and counting!</h3>
 
 
-<ul class="list-group cum">
+<ul class="list-group">
     <% @articles.each do |article| %>
         <% unless article.archived? %>
             <li class="list-group-item list-group-item-action mb-4">
