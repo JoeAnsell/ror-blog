@@ -22,16 +22,18 @@
               <a class="nav-link" aria-current="page" href="/">Home</a>
             </li>
           </ul>
-          <ul class="navbar-nav">
+          <ul class="navbar-nav gap-2">
           <% if user_signed_in? %>
-            <li class="nav-item nav-link">
-              <%= link_to "Edit Password", edit_password_path %>
+            <li class="nav-item ">
+              <%= link_to "Edit Password", edit_password_path, class: "btn btn-outline-secondary" %>
               <%= button_to "Log Out", session_path, method: :delete %>
             </li>
           <% else %>
-            <li class="nav-item nav-link">
-              <%= link_to "Sign Up", new_registration_path %>
-              <%= link_to "Log In", new_session_path %>
+            <li class="nav-item ">
+              <%= link_to "Sign Up", new_registration_path, class: "btn btn-outline-secondary" %>
+            </li>
+            <li class="nav-item ">
+              <%= link_to "Log In", new_session_path, class: "btn btn-outline-secondary" %>
             </li>
           <% end %>
           </ul>
