@@ -75,7 +75,13 @@ Rails.application.configure do
   config.action_controller.raise_on_missing_callback_actions = true
 
   config.assets.debug = true
-config.assets.compile = true
-config.assets.digest = false
-config.assets.check_precompiled_asset = false
+  config.assets.compile = true
+  config.assets.digest = false
+  config.assets.check_precompiled_asset = false
+
+
+  config.action_mailer_default_url_options = { host: "localhost", port: 3000 }
+
+  Rails.application.routes.default_url_options[:host] = 'localhost:3000'
+
 end
