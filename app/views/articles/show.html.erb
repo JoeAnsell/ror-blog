@@ -3,16 +3,24 @@
 
 <p> <%= @article.body %> </p>
 
-<ul class="d-flex gap-4">
-    <li><%= link_to "Edit", edit_article_path(@article) %></li>
-    <li><%= link_to "Destroy", article_path(@article), data: {
-        turbo_method: :delete,
-        turbo_confirm: "Are you sure?"
-    } %></li>
+<ul class="d-flex gap-4 mb-5 mt-5 ps-0">
+    <li><%= link_to "Edit", edit_article_path(@article), class: "btn btn-primary"%></li>
+    <li><%= link_to "Destroy", 
+        article_path(@article), 
+        method: :delete, 
+        data: {confirm: "Are you sure?"},
+        class: "btn btn-danger" 
+    %></li>
 </ul>
 
-<h2>Comments</h2>
-<%= render @article.comments %>
+<div>
+    <h2>Comments</h2>
+    <%= render @article.comments %>
+</div>
 
-<h2>Add a comment:</h2>
-<%= render 'comments/form' %>
+<div class="rounded p-4 bg-light w-auto mw-50">
+
+    <h3 class="mb-4">Add a comment:</h3>
+    <%= render 'comments/form' %>
+
+</div>

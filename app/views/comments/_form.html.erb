@@ -2,17 +2,17 @@
 
     <p>
         <%= form.label :commenter %><br>
-        <%= form.text_field :commenter %><br>
+        <%= form.text_field :commenter, class: "form-control w-auto"%>
     </p>
 
     <p>
         <%= form.label :body %><br>
-        <%= form.text_area :body %><br>
+        <%= form.text_area :body, class: "form-control w-auto"%>
     </p>
 
     <p>
         <%= form.label :status %><br>
-        <%= form.select :status, Visible::VALID_STATUSES, selected: 'public' %>
+        <%= form.select :status, Visible::VALID_STATUSES, { selected: 'public' }, { class: "form-select w-auto" }  %>
     </p>
 
 
