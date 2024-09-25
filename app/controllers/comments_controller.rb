@@ -1,8 +1,16 @@
 class CommentsController < ApplicationController
+    before_action :authenticate_user! 
+
     def create 
         @article = Article.find(params[:article_id])
-        @comment = @article.comments.create(comment_params)
-        redirect_to article_path(@article)
+        @comment = @article.comments.new(comment_params)
+        @comment.user = current_user
+
+        if @comment.save
+            redirect_to article_path(@article), notice: 'Comment was successfully created.'
+        else
+            redirect_to article_path(@article), alert: 'Unable to add comment.'
+        end
     end
 
     def destroy
@@ -14,6 +22,6 @@ class CommentsController < ApplicationController
 
     private 
         def comment_params
-            params.require(:comment).permit(:commenter, :body, :status)
+            params.require(:comment).permit(:body, :status)
         end
 end

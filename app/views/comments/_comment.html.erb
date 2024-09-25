@@ -1,15 +1,14 @@
 <% unless comment.archived? %>
-<p>
-    <strong>Commenter:</strong>
-    <%= comment.commenter %>
-</p>
+<div>
+    <p class="mb-0">
+        <strong>Comment: </strong><%= comment.body %>
+    </p>
+    <p>
+        <strong>by: </strong> <%= comment.user_id %>
+    </p>
 
-<p>
-    <strong>Comment:</strong>
-    <%= comment.body %>
-</p>
-
-<p>
-    <%= link_to "Destroy Comment", [comment.article, comment],data: {turbo_method: :delete, turbo_confirm: "Are you sure"}%>
-</p>
+    <p>
+        <%= link_to "Destroy Comment", [comment.article, comment],data: {turbo_method: :delete, turbo_confirm: "Are you sure"}%>
+    </p>
+</div>
 <% end %>
