@@ -4,6 +4,7 @@ class LikesController < ApplicationController
 
   def create 
     @article.likes.create(user: current_user)
+    # Update button without refreshing page
     respond_to do |format|
       format.html { redirect_to @article }
       format.js   # Render a JavaScript file (create.js.erb)
@@ -13,9 +14,10 @@ class LikesController < ApplicationController
 
   def destroy 
     @article.likes.find_by(user: current_user)&.destroy
+    # Update button without refreshing page
     respond_to do |format|
       format.html { redirect_to @article }
-      format.js   # Render a JavaScript file (destroy.js.erb)
+      format.js   # Render a JavaScript file (destroy.js.erb) 
     end
   end
 

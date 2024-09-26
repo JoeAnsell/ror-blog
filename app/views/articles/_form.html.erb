@@ -20,9 +20,13 @@
 
 
         <div class="mb-5">
-            <%= form.label :status %><br>
+            <%= form.label :status , class: 'mb-2'%><br>
             <%= form.select :status, Visible::VALID_STATUSES, { selected: article.status || 'public' }, { class: "form-select" } %>
+        </div>
 
+        <div class="mb-5">
+            <%= form.label :tags , "Tags (comma separated)", class: 'mb-2'%>
+            <%= form.text_field :tag_list, value: @article.tag_list, class: "form-control" %>
         </div>
 
         <div>

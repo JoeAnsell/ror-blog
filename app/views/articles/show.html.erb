@@ -3,6 +3,10 @@
 
 <p> <%= @article.body %> </p>
 
+<p>
+  <strong>Tags:</strong>
+  <%= @article.tags.map { |t| link_to t.name, tag_path(t.name) }.join(", ").html_safe %>
+</p>
 <br>
 <hr>
 <br>

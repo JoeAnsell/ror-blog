@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     resource :likes, only: [:create, :destroy]
   end
 
+  get 'tags/:tag', to: 'tags#index', as: :tag
+
 
   resource :session
   resource :registration
