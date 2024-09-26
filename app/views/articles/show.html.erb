@@ -7,7 +7,7 @@
 <hr>
 <br>
 
-<% if current_user.id == @article.user_id %>
+<% if current_user && current_user.id == @article.user_id %>
 <ul class="d-flex gap-4 mb-5 ps-0">
     <li><%= link_to "Edit", edit_article_path(@article), class: "btn btn-primary"%></li>
     <li><%= button_to "Destroy", 
