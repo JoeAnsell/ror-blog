@@ -3,7 +3,12 @@
 
 <p> <%= @article.body %> </p>
 
-<ul class="d-flex gap-4 mb-5 mt-5 ps-0">
+<br>
+<hr>
+<br>
+
+<% if current_user.id == @article.user_id %>
+<ul class="d-flex gap-4 mb-5 ps-0">
     <li><%= link_to "Edit", edit_article_path(@article), class: "btn btn-primary"%></li>
     <li><%= link_to "Destroy", 
         article_path(@article), 
@@ -12,9 +17,10 @@
         class: "btn btn-danger" 
     %></li>
 </ul>
+<% end %>
 
 <div class="mb-5">
-    <h2>Comments</h2>
+    <h2 class="mb-4">Comments</h2>
     <%= render @article.comments %>
 </div>
 

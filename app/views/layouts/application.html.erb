@@ -23,24 +23,27 @@
             </li>
           </ul>
           <ul class="navbar-nav gap-2">
-          <% if user_signed_in? %>
-            <li class="nav-item ">
-              <%= link_to "Create Article", new_article_path, class: "btn btn-outline-secondary" %>
+            <li class="nav-item d-flex align-items-center me-2">
+              <p class="mb-0"><%= @user_name %></p>
             </li>
-            <li class="nav-item ">
-              <%= link_to "Edit Password", edit_password_path, class: "btn btn-outline-secondary" %>
-            </li>
-            <li class="nav-item ">
-              <%= button_to "Log Out", session_path, method: :delete, class: "btn btn-outline-secondary"%>
-            </li>
-          <% else %>
-            <li class="nav-item ">
-              <%= link_to "Sign Up", new_registration_path, class: "btn btn-outline-secondary" %>
-            </li>
-            <li class="nav-item ">
-              <%= link_to "Log In", new_session_path, class: "btn btn-outline-secondary" %>
-            </li>
-          <% end %>
+            <% if user_signed_in? %>
+              <li class="nav-item ">
+                <%= link_to "Create Article", new_article_path, class: "btn btn-outline-secondary" %>
+              </li>
+              <li class="nav-item ">
+                <%= link_to "Edit Password", edit_password_path, class: "btn btn-outline-secondary" %>
+              </li>
+              <li class="nav-item ">
+                <%= button_to "Log Out", session_path, method: :delete, class: "btn btn-outline-secondary"%>
+              </li>
+            <% else %>
+              <li class="nav-item ">
+                <%= link_to "Sign Up", new_registration_path, class: "btn btn-outline-secondary" %>
+              </li>
+              <li class="nav-item ">
+                <%= link_to "Log In", new_session_path, class: "btn btn-outline-secondary" %>
+              </li>
+            <% end %>
           </ul>
         </div>
       </div>
@@ -48,8 +51,12 @@
 
 
     <main class="container mx-auto pt-5 px-3 md:px-5 ">
-      <div><%= notice %></div>
-      <div><%= alert %></div>
+      <% if notice %>
+        <div class="alert alert-success d-inline-block" role="alert"><%= notice %></div>
+      <% end %>
+      <% if alert %>
+        <div class="alert alert-danger d-inline-block" role="alert"><%= alert %></div>
+      <% end %>
       <%= yield %>
     </main>
   </body>

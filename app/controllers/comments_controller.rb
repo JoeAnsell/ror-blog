@@ -1,6 +1,11 @@
 class CommentsController < ApplicationController
     before_action :authenticate_user! 
 
+    def comment
+        @article.egg = 'egg'
+    end
+
+
     def create 
         @article = Article.find(params[:article_id])
         @comment = @article.comments.new(comment_params)
