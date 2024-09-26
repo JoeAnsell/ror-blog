@@ -1,0 +1,8 @@
+//Using j is a best practice to ensure that any HTML/JavaScript you generate dynamically is safe and correctly formatted.
+//It prevents potential XSS vulnerabilities by escaping special characters that could alter the behavior of your JavaScript code.
+
+// Update the Unlike button to "Like" after unliking
+document.getElementById("like-button").outerHTML = '<%= j button_to "Like", article_likes_path(@article), remote: true, class: "btn btn-success", id: "like-button" %>';
+
+// Update the like count
+document.getElementById("like-count").innerHTML = "<%= @article.likes.count %> Likes";

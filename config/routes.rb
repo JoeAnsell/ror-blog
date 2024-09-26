@@ -13,7 +13,9 @@ Rails.application.routes.draw do
 
   resources :articles do
     resources :comments
+    resource :likes, only: [:create, :destroy]
   end
+
 
   resource :session
   resource :registration

@@ -8,4 +8,6 @@ class Article < ApplicationRecord
     validates :title, presence: true
     validates :body, presence: true, length: { minimum: 10 }
     
+    has_many :likes, dependent: :destroy
+    has_many :liked_by_users, through: :likes, source: :user 
 end

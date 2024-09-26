@@ -1,0 +1,5 @@
+// Update the Like button to "Unlike" after liking
+document.getElementById("like-button").outerHTML = '<%= j button_to "Unlike", article_likes_path(@article), method: :delete, remote: true, class: "btn btn-warning", id: "like-button" %>';
+
+// Update the like count
+document.getElementById("like-count").innerHTML = "<%= @article.likes.count %> Likes";

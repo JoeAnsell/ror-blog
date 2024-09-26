@@ -8,16 +8,27 @@
 <br>
 
 <% if current_user && current_user.id == @article.user_id %>
-<ul class="d-flex gap-4 mb-5 ps-0">
-    <li><%= link_to "Edit", edit_article_path(@article), class: "btn btn-primary"%></li>
-    <li><%= button_to "Destroy", 
-        article_path(@article), 
-        method: :delete, 
-        data: {confirm: "Are you sure?"},
-        class: "btn btn-danger" 
-    %></li>
-</ul>
+    <ul class="d-flex gap-4 mb-5 ps-0">
+        <li><%= link_to "Edit", edit_article_path(@article), class: "btn btn-primary"%></li>
+        <li><%= button_to "Destroy", 
+            article_path(@article), 
+            method: :delete, 
+            data: {confirm: "Are you sure?"},
+            class: "btn btn-danger" 
+        %></li>
+    </ul>
 <% end %>
+
+<div>
+  <% if current_user && @article.liked_by_users.include?(current_user) %>
+    <%= button_to 'Unlike', article_likes_path(@article), method: :delete, remote: true, class: "btn btn-warning", id: "like-button" %>
+  <% else %>
+    <%= button_to 'Like', article_likes_path(@article), remote: true, class: "btn btn-success", id: "like-button"%>
+  <% end %>
+
+  <p id="like-count" class="mt-2"><%= @article.likes.count %> Likes</p>
+
+</div>
 
 <div class="mb-5">
     <h2 class="mb-4">Comments</h2>
