@@ -23,10 +23,10 @@
             </li>
           </ul>
           <ul class="navbar-nav gap-2">
-            <li class="nav-item d-flex align-items-center me-2">
-              <p class="mb-0"><%= @user_name %></p>
-            </li>
             <% if user_signed_in? %>
+              <li class="nav-item d-flex align-items-center me-2">
+                <p class="mb-0"><%= current_user.email %></p>
+              </li>
               <li class="nav-item ">
                 <%= link_to "Create Article", new_article_path, class: "btn btn-outline-secondary" %>
               </li>

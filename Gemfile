@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.0.0"
+ruby "3.3.1"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.4"
@@ -71,5 +71,14 @@ gem "cssbundling-rails"
 
 gem "bootstrap"
 
-
 gem "jsbundling-rails", "~> 1.3"
+
+gem "puts_debuggerer", "~> 1.0"
+
+gem 'cloudinary', '~> 2.2'
+
+gem 'carrierwave', '~> 2.0'
+
+
+
+

@@ -1,4 +1,4 @@
-<%= form_with model: @article do |form| %>
+<%= form_with model: @article,  local: true, html: { multipart: true } do |form| %>
     <div class="mb-4">
         <div class="mb-4">
             <%= form.label :title, class: 'mb-2'%><br>
@@ -8,6 +8,17 @@
             <div class="mb-2"><%= message %></div>
             <% end %>
         </div>
+
+
+        <div class="mb-4">
+            <%= form.label :image, class: 'mb-2'%><br>
+            <%= form.file_field :image, class: 'form-control mb-2'%>
+            <% @article.errors.full_messages_for(:image).each do |message| %>
+
+            <div class="ms-1 text-danger"><%= message %></div>
+            <% end %>
+        </div>
+
 
         <div class="mb-4">
             <%= form.label :body , class: 'mb-2'%> 
