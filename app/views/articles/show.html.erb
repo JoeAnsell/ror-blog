@@ -1,16 +1,12 @@
 <h1> <%= @article.title %> </h1>
 <p>Author: <%= @user_name %>
 
-<%
-=begin%>
- <% if @article.image.present? %>
+<% if @article.image.present? %>
   <p>
     <strong>Image:</strong><br>
     <%= image_tag @article.image.url %>
   </p>
-<% end %> 
-<%
-=end%>
+<% end %>
 
 <p> <%= @article.body %> </p>
 
