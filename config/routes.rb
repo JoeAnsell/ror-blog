@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   get 'tags/:tag', to: 'tags#index', as: :tag
 
-
+  resources :my_articles, path: 'my-articles'
   resource :session
   resource :registration
   resource :password_reset
