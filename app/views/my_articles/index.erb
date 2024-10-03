@@ -1,7 +1,20 @@
 <h1>My Articles</h1>
 
 <ul class="list-group mt-4">
-    <% @articles.each do |article| %>
+    <h2>Published</h2>
+    <% @live_articles.each do |article| %>
+        <% unless article.archived? %>
+            <li class="list-group-item list-group-item-action">
+                <a href="/articles/<%= article_path(article) %>">
+                    <%= link_to article.title, article %>
+                </a>
+            </li>
+        <% end %>
+    <% end %>
+    <br>
+
+    <h2>Drafts</h2>
+    <% @draft_articles.each do |article| %>
         <% unless article.archived? %>
             <li class="list-group-item list-group-item-action">
                 <a href="/articles/<%= article_path(article) %>">
