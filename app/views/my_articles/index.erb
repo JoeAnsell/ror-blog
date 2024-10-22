@@ -3,24 +3,20 @@
 <ul class="list-group mt-4">
     <h2>Published</h2>
     <% @live_articles.each do |article| %>
-        <% unless article.archived? %>
-            <li class="list-group-item list-group-item-action">
-                <a href="/articles/<%= article_path(article) %>">
-                    <%= link_to article.title, article %>
-                </a>
-            </li>
-        <% end %>
+        <li class="list-group-item list-group-item-action">
+            <a href="/articles/<%= article_path(article) %>">
+                <%= link_to article.title, article %>
+            </a>
+        </li>
     <% end %>
     <br>
 
     <h2>Drafts</h2>
     <% @draft_articles.each do |article| %>
-        <% unless article.archived? %>
-            <li class="list-group-item list-group-item-action">
-                <a href="/articles/<%= article_path(article) %>">
-                    <%= link_to article.title, article %>
-                </a>
-            </li>
-        <% end %>
+        <li class="list-group-item list-group-item-action">
+            <a href="/articles/<%= article_path(article) %>">
+                <%= link_to article.title, article %>
+            </a>
+        </li>
     <% end %>
 </ul>

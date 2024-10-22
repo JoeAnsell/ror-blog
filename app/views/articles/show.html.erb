@@ -4,7 +4,7 @@
 <% if @article.image.present? %>
   <p>
     <strong>Image:</strong><br>
-    <%= image_tag @article.image.url %>
+    <%= cl_image_tag(@article.image) %>
   </p>
 <% end %>
 

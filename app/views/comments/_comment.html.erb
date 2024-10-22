@@ -1,4 +1,3 @@
-<% unless comment.archived? %>
 <div class="mb-5">
     <p class="mb-0">
         <strong>Comment: </strong><%= comment.body %>
@@ -7,8 +6,9 @@
         <strong>by: </strong> <%= comment.user.email %>
     </p>
 
+    <% if comment.user == current_user %>
     <p>
         <%= link_to "Destroy Comment", [comment.article, comment],data: {turbo_method: :delete, turbo_confirm: "Are you sure"}%>
     </p>
+    <% end %>
 </div>
-<% end %>
