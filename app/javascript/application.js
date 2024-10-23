@@ -4,3 +4,4 @@ import { createPopper } from "@popperjs/core";
 import "bootstrap";
 import * as bootstrap from "bootstrap";
 import "./controllers";
+import "./articles-search";
