@@ -4,10 +4,10 @@
 
 <!-- Search Form -->
 <div>
-  <input type="text" id="search-input" placeholder="Search by article title" />
+  <input type="text" id="search-input" placeholder="Search by article title" class="form-control mb-2"/>
 </div>
 
 <!-- Search Results -->
 <div id="article-results">
-  <%= render partial: 'articles_list', locals: { articles: @articles } %>
+  <%= render partial: 'shared/articles_list', locals: { articles: @articles } %>
 </div>
