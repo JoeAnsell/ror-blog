@@ -76,7 +76,7 @@ Rails.application.configure do
 
   config.assets.debug = true
   config.assets.compile = true
-  config.assets.digest = false
+  config.assets.digest = true
   config.assets.check_precompiled_asset = false
 
 
@@ -86,5 +86,7 @@ Rails.application.configure do
 
 
   Rails.application.routes.default_url_options[:host] = 'localhost:3000'
+
+
 
 end

@@ -1,4 +1,10 @@
 <h1 class="mb-4">New Article</h1>
 
-    
+<div data-controller="canvas">
+  <canvas class="border" id="fabricCanvas" width="600" height="400"></canvas>
+</div>
+
+<div data-controller="simple">This is a simple controller</div>
+
+
 <%= render "form", article: @article %>

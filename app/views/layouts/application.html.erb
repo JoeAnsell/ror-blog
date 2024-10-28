@@ -8,7 +8,6 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>  
 
     <%= javascript_importmap_tags %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
 
 
   </head>
@@ -22,7 +21,7 @@
               <%= link_to "Home", root_path, class: "nav-link" %>
             </li>
             <li class="nav-item">
-              <%= link_to "Search", 'search', class: "nav-link" %>
+              <%= link_to "Search", search_path, class: "nav-link" %>
             </li>
           </ul>
           <ul class="navbar-nav gap-2">

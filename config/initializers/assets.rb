@@ -20,3 +20,7 @@ Rails.application.config.assets.precompile += %w( bootstrap.min.js popper.js)
 Rails.application.config.assets.precompile << "bootstrap.min.js"
 
 Rails.application.config.assets.paths << Rails.root.join("app", "assets", "builds")
+
+Rails.application.config.assets.debug = true  # Enable debugging (including source maps)
+Rails.application.config.assets.compile = true # Allow asset compilation
+
