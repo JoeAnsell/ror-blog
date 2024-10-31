@@ -4,13 +4,19 @@ import { fabric } from "fabric"; // browser
 
 export default class extends Controller {
   connect() {
+    const savedCanvas = localStorage.getItem("canvasState");
     console.log("Canvas controller connected!");
     const canvasContainer = document.getElementById("canvas-container");
     const stickerButton = document.querySelectorAll(".sticker-button");
     const mouseSticker = document.getElementById("mouse-sticker");
+    const saveButton = document.getElementById("save-button");
     const canvas = new fabric.Canvas("fabricCanvas");
 
     let imageSize = 100;
+
+    if (savedCanvas) {
+      canvas.loadFromJSON(savedCanvas, canvas.renderAll.bind(canvas));
+    }
 
     function addImage(event) {
       console.log("double click");
@@ -72,6 +78,13 @@ export default class extends Controller {
         // const context = canvas.getContext("2d");
         // context.drawImage(event.target, 0, 0);
       });
+    });
+
+    saveButton.addEventListener("click", (event) => {
+      const canvasJSON = canvas.toJSON();
+      localStorage.setItem("canvasState", JSON.stringify(canvasJSON));
+
+      console.log(canvasJSON);
     });
   }
 }
