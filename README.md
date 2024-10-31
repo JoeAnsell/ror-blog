@@ -24,5 +24,7 @@ Things you may want to cover:
 - ...
 
 Start rails server
-
 `bin/dev`
+
+Compile JS & CSS code
+`yarn build --watch`
