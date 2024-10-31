@@ -2,3 +2,7 @@
 @import "_reset.scss";
 @import "bootstrap/scss/bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons";
+
+canvas {
+  border: 2px solid red;
+}

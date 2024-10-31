@@ -1,8 +1,11 @@
 <h1 class="mb-4">New Article</h1>
 
-<div data-controller="canvas" id="canvas-container">
-  <div class="button-container">
+<div class="button-container">
     <img id="shrek-sticker-1" class="sticker-button" src="/shrek.png" alt="shrek" width="50" height="50">
+  </div>
+<div data-controller="canvas" id="canvas-container">
+  <div class="position-absolute mouse-image-container" id="mouse-image-container" style="opacity: 0.25; pointer-events: none;">
+    <img class="mouse-image" src="/shrek.png" alt="shrek" >
   </div>
   <canvas class="border" id="fabricCanvas" width="600" height="400"></canvas>
 </div>
