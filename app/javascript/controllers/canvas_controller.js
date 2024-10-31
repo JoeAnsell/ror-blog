@@ -1,26 +1,34 @@
 // app/javascript/controllers/canvas_controller.js
 import { Controller } from "@hotwired/stimulus";
-import { Canvas, Rect } from "fabric"; // browser
+import { fabric } from "fabric"; // browser
 
 export default class extends Controller {
   connect() {
     console.log("Canvas controller connected!");
-    console.log("Canvas!----");
-    console.log("Canvas", Canvas);
-    console.log(
-      'document.getElementById("fabricCanvas")',
-      document.getElementById("fabricCanvas")
-    );
-    const canvas = new Canvas("fabricCanvas");
-    // console.log("canvas", canvas);
-    // // Add objects to the canvas as needed
-    const rect = new Rect({
-      left: 100,
-      top: 100,
-      fill: "blue",
-      width: 60,
-      height: 70,
-    });
-    canvas.add(rect);
+    // const canvasContainer = document.getElementById("canvas-container");
+    const canvas = new fabric.Canvas("fabricCanvas");
+
+    let size = 100;
+
+    function addImage(event) {
+      console.log("double click");
+      const pointer = canvas.getPointer(event.e);
+      new fabric.Image.fromURL("/shrek.png", (img) => {
+        console.log("img", img);
+        console.log("canvas", canvas);
+        console.log(" canvas.getObjects().length", canvas.getObjects());
+        img.set({
+          left: pointer.x - size / 2,
+          top: pointer.y - size / 2,
+        });
+        img.scaleToWidth(size);
+        img.scaleToHeight(size);
+
+        canvas.add(img);
+      });
+      canvas.renderAll();
+    }
+
+    canvas.on("mouse:dblclick", addImage);
   }
 }
