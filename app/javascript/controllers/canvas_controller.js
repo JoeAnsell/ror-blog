@@ -6,9 +6,8 @@ export default class extends Controller {
   connect() {
     console.log("Canvas controller connected!");
     const canvasContainer = document.getElementById("canvas-container");
-    const mouseImageContainer = document.getElementById(
-      "mouse-image-container"
-    );
+    const stickerButton = document.querySelectorAll(".sticker-button");
+    const mouseSticker = document.getElementById("mouse-sticker");
     const canvas = new fabric.Canvas("fabricCanvas");
 
     let imageSize = 100;
@@ -16,7 +15,7 @@ export default class extends Controller {
     function addImage(event) {
       console.log("double click");
       const pointer = canvas.getPointer(event.e);
-      new fabric.Image.fromURL("/shrek.png", (img) => {
+      new fabric.Image.fromURL(mouseSticker.src, (img) => {
         console.log("img", img);
         console.log("canvas", canvas);
         console.log(" canvas.getObjects().length", canvas.getObjects());
@@ -26,6 +25,13 @@ export default class extends Controller {
         });
         img.scaleToWidth(imageSize);
         img.scaleToHeight(imageSize);
+        img.on("mouseover", function () {
+          mouseSticker.style.opacity = 0;
+        });
+
+        img.on("mouseout", function () {
+          mouseSticker.style.opacity = 0.25;
+        });
 
         canvas.add(img);
       });
@@ -34,11 +40,11 @@ export default class extends Controller {
 
     canvas.on("mouse:dblclick", addImage);
     canvasContainer.addEventListener("click", (event) => {
-      mouseImageContainer.style.opacity = 0.25;
+      mouseSticker.style.opacity = 0.25;
     });
 
-    mouseImageContainer.style.width = `${imageSize}px`;
-    mouseImageContainer.style.height = `${imageSize}px`;
+    mouseSticker.style.width = `${imageSize}px`;
+    mouseSticker.style.height = `${imageSize}px`;
 
     canvasContainer.addEventListener("mousemove", (event) => {
       const rect = canvasContainer.getBoundingClientRect();
@@ -47,18 +53,25 @@ export default class extends Controller {
       const mouseX = event.clientX - rect.left - imageSize / 2;
       const mouseY = event.clientY - rect.top - imageSize / 2;
 
-      mouseImageContainer.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+      mouseSticker.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
     });
 
     canvas.on("object:scaling", function (event) {
-      mouseImageContainer.style.opacity = 0;
+      mouseSticker.style.opacity = 0;
     });
     canvas.on("object:rotating", function (event) {
-      mouseImageContainer.style.opacity = 0;
+      mouseSticker.style.opacity = 0;
     });
-    // canvas.on("object:scaled", function (event) {
-    //   console.log("scaled");
-    //   mouseImageContainer.style.opacity = 0.25;
-    // });
+
+    stickerButton.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        console.log("button clicked");
+        console.log(event.target);
+        mouseSticker.src = event.target.src;
+        // const canvas = canvasContainer.querySelector("canvas");
+        // const context = canvas.getContext("2d");
+        // context.drawImage(event.target, 0, 0);
+      });
+    });
   }
 }
