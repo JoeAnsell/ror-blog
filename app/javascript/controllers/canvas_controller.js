@@ -10,6 +10,9 @@ export default class extends Controller {
     const stickerButton = document.querySelectorAll(".sticker-button");
     const mouseSticker = document.getElementById("mouse-sticker");
     const saveButton = document.getElementById("save-button");
+    const deleteButton = document.getElementById("delete-button");
+    const moveForward = document.getElementById("move-forwards");
+    const moveBackwards = document.getElementById("move-backwards");
     const canvas = new fabric.Canvas("fabricCanvas");
 
     let imageSize = 100;
@@ -18,13 +21,9 @@ export default class extends Controller {
       canvas.loadFromJSON(savedCanvas, canvas.renderAll.bind(canvas));
     }
 
-    function addImage(event) {
-      console.log("double click");
+    const addImage = (event) => {
       const pointer = canvas.getPointer(event.e);
       new fabric.Image.fromURL(mouseSticker.src, (img) => {
-        console.log("img", img);
-        console.log("canvas", canvas);
-        console.log(" canvas.getObjects().length", canvas.getObjects());
         img.set({
           left: pointer.x - imageSize / 2,
           top: pointer.y - imageSize / 2,
@@ -42,7 +41,54 @@ export default class extends Controller {
         canvas.add(img);
       });
       canvas.renderAll();
-    }
+    };
+
+    const deleteImage = (event) => {
+      const activeObject = canvas.getActiveObject();
+
+      // Check if an object is selected
+      if (activeObject) {
+        // Remove the active object from the canvas
+        canvas.remove(activeObject);
+
+        // Re-render the canvas to show changes
+        canvas.renderAll();
+      } else {
+        alert("Please select an image to delete.");
+      }
+    };
+
+    const handleMoveForwards = (event) => {
+      const activeObject = canvas.getActiveObject();
+
+      console.log("activeObject", activeObject);
+      // Check if an object is selected
+      if (activeObject) {
+        // Move the active object forward in the z-index
+        activeObject.bringForward();
+
+        // Re-render the canvas to show changes
+        canvas.renderAll();
+      } else {
+        alert("Please select an image to bring forward.");
+      }
+    };
+
+    const handleMoveBackwards = (event) => {
+      const activeObject = canvas.getActiveObject();
+
+      console.log("activeObject", activeObject);
+      // Check if an object is selected
+      if (activeObject) {
+        // Move the active object forward in the z-index
+        activeObject.sendBackwards();
+
+        // Re-render the canvas to show changes
+        canvas.renderAll();
+      } else {
+        alert("Please select an image to bring forward.");
+      }
+    };
 
     canvas.on("mouse:dblclick", addImage);
     canvasContainer.addEventListener("click", (event) => {
@@ -71,13 +117,21 @@ export default class extends Controller {
 
     stickerButton.forEach((button) => {
       button.addEventListener("click", (event) => {
-        console.log("button clicked");
-        console.log(event.target);
-        mouseSticker.src = event.target.src;
-        // const canvas = canvasContainer.querySelector("canvas");
-        // const context = canvas.getContext("2d");
-        // context.drawImage(event.target, 0, 0);
+        const newImage = (button.querySelector("img").src = event.target.src);
+        mouseSticker.src = newImage;
       });
+    });
+
+    deleteButton.addEventListener("click", function () {
+      deleteImage();
+    });
+
+    moveForward.addEventListener("click", function () {
+      handleMoveForwards();
+    });
+
+    moveBackwards.addEventListener("click", function () {
+      handleMoveBackwards();
     });
 
     saveButton.addEventListener("click", (event) => {

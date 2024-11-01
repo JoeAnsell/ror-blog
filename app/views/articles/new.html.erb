@@ -3,16 +3,31 @@
 <div class="button-container d-flex flex-row ">
   <% Dir.glob("#{Rails.root}/public/shrek/*").each do |image_path| %>
     <% image_file = File.basename(image_path) %>
-    <img id="<%= image_file.chomp(File.extname(image_file)) %>-sticker" class="sticker-button" src="/shrek/<%= image_file %>" alt="shrek" width="50" height="50">
+    <button class="sticker-button" id="<%= image_file.chomp(File.extname(image_file)) %>-sticker">
+      <img src="/shrek/<%= image_file %>" alt="shrek" width="50" height="50">
+    </button>
   <% end %>
 </div>
 
 <div data-controller="canvas" id="canvas-container" class="mb-4">  
   <img class="position-absolute mouse-sticker"  style="opacity: 0.25; pointer-events: none; "id="mouse-sticker" src="/shrek/shrek.png" alt="shrek" width="50" height="50">
-  <canvas class="border" id="fabricCanvas" width="600" height="400"></canvas>
+  <canvas class="border" id="fabricCanvas" width="1288" height="400"></canvas>
 </div>
-<button>
 
-<button id="save-button" class="mb-4 btn btn-primary">Save</button>
+<ul class="d-flex gap-2 mb-4">
+  <li>
+    <button id="save-button" class="mb-4 btn btn-primary">Save</button>
+  </li>
+  <li>
+    <button id="delete-button" class="mb-4 btn btn-primary">Delete</button>
+  </li>
+  <li>
+    <button id="move-forwards" class="mb-4 btn btn-primary">Move forwards</button>
+  </li>
+  <li>
+    <button id="move-backwards" class="mb-4 btn btn-primary">Move backwards</button>
+  </li>
+</ul>
 
 <%= render "form", article: @article %>
+
