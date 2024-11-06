@@ -18,6 +18,23 @@ export default class extends Controller {
     const canvasImageField = document.getElementById("canvas-image-field");
     const canvas = new fabric.Canvas("fabricCanvas");
 
+    console.log(
+      "canvasContainer",
+      canvasContainer.getBoundingClientRect().width,
+      canvasContainer.getBoundingClientRect().height
+    );
+
+    const bg = new fabric.Rect({
+      left: -1,
+      top: -1,
+      width: canvasContainer.getBoundingClientRect().width + 2,
+      height: canvasContainer.getBoundingClientRect().height + 2,
+      fill: "white",
+      selectable: false, // prevent the rectangle from being selected
+    });
+
+    canvas.add(bg);
+
     let imageSize = 100;
 
     const resizeCanvas = () => {

@@ -2,6 +2,10 @@
   overflow: hidden;
 }
 
+.mouse-sticker {
+  z-index: 1;
+}
+
 .canvas-button-container {
   .sticker-button {
     &:hover {
