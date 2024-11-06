@@ -1,5 +1,54 @@
 <%= form_with model: @article,  local: true, html: { multipart: true } do |form| %>
-    <div class="mb-4">
+        <div class="mb-4">
+            <div class="canvas-button-container d-flex flex-row pb-2 gap-1">
+                <% Dir.glob("#{Rails.root}/public/shrek/*").each do |image_path| %>
+                    <% image_file = File.basename(image_path) %>
+                    <button type="button" class="border sticker-button p-2 rounded-1" id="<%= image_file.chomp(File.extname(image_file)) %>-sticker">
+                    <img src="/shrek/<%= image_file %>" alt="shrek" width="75" height="75">  
+                    </button>
+                <% end %>
+                <div class="w-100 h-2" id="sticker-size"></div>
+            </div>
+
+            <div data-controller="canvas" id="canvas-container" class="canvas-container mb-2" style="width: 100%;height: calc(100vh - 200px);">  
+                <img class="position-absolute mouse-sticker"  style="opacity: 0.25; pointer-events: none; "id="mouse-sticker" src="/shrek/shrek.png" alt="shrek" width="50" height="50">
+                <canvas class="border" id="fabricCanvas" width="100%" height="100%"></canvas>
+            </div>
+
+            <ul class="d-flex gap-2 mb-4 ps-0">
+                <li>
+                    <button type="button" id="save-button" class="mb-4 btn btn-primary">Save</button>
+                </li> 
+                <li>
+                    <button type="button" id="delete-button" class="mb-4 btn btn-primary">Delete</button>
+                </li>
+                <li>
+                    <button type="button" id="move-forwards" class="mb-4 btn btn-primary">Move forwards</button>
+                </li>
+                <li>
+                    <button type="button" id="move-backwards" class="mb-4 btn btn-primary">Move backwards</button>
+                </li>
+            </ul>
+        </div>
+
+        <div class="mb-4">
+            <%= form.label :image, class: 'mb-2'%><br>
+            <%= form.file_field :image, class: 'form-control mb-2', id: 'canvas-image-field'%>
+            <% @article.errors.full_messages_for(:image).each do |message| %>
+
+            <div class="ms-1 text-danger"><%= message %></div>
+            <% end %>
+        </div>
+
+        <div class="mb-4">
+            <%= form.label :canvas_data, class: 'mb-2'%><br>
+            <%= form.text_field :canvas_data, class: 'form-control mb-2', id: 'canvas-data-field'%>
+            <% @article.errors.full_messages_for(:canvas_data).each do |message| %>
+
+            <div class="mb-2"><%= message %></div>
+            <% end %>
+        </div>
+
         <div class="mb-4">
             <%= form.label :title, class: 'mb-2'%><br>
             <%= form.text_field :title, class: 'form-control mb-2'%>
@@ -8,17 +57,6 @@
             <div class="mb-2"><%= message %></div>
             <% end %>
         </div>
-
-
-        <div class="mb-4">
-            <%= form.label :image, class: 'mb-2'%><br>
-            <%= form.file_field :image, class: 'form-control mb-2'%>
-            <% @article.errors.full_messages_for(:image).each do |message| %>
-
-            <div class="ms-1 text-danger"><%= message %></div>
-            <% end %>
-        </div>
-
 
         <div class="mb-4">
             <%= form.label :body , class: 'mb-2'%> 

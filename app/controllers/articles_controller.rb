@@ -38,7 +38,10 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id])
+    puts "**************"
+    puts params[:id]
+
+    @article = Article.find(params[:id]) 
   end
 
   def update
@@ -60,7 +63,7 @@ class ArticlesController < ApplicationController
 
   private
     def article_params
-        params.require(:article).permit(:title, :body, :image, :status, :tag_list)
+        params.require(:article).permit(:title, :body, :image, :status, :tag_list, :canvas_data)
     end
 
 end

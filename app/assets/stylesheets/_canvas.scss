@@ -1,0 +1,11 @@
+.canvas-container {
+  overflow: hidden;
+}
+
+.canvas-button-container {
+  .sticker-button {
+    &:hover {
+      background-color: #efefef;
+    }
+  }
+}

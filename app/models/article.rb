@@ -15,6 +15,9 @@ class Article < ApplicationRecord
     has_many :tags, through: :taggings
 
     mount_uploader :image, ImageUploader
+    
+    serialize :canvas_data, JSON
+
 
 
     def tag_list

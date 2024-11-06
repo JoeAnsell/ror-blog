@@ -1,5 +1,7 @@
 // Entry point for your Sass build
 @import "_reset.scss";
+@import "_custom.scss";
+@import "_canvas.scss";
 @import "bootstrap/scss/bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons";
 

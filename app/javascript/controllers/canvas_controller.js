@@ -1,6 +1,7 @@
 // app/javascript/controllers/canvas_controller.js
 import { Controller } from "@hotwired/stimulus";
 import { fabric } from "fabric"; // browser
+import noUiSlider from "nouislider";
 
 export default class extends Controller {
   connect() {
@@ -13,13 +14,31 @@ export default class extends Controller {
     const deleteButton = document.getElementById("delete-button");
     const moveForward = document.getElementById("move-forwards");
     const moveBackwards = document.getElementById("move-backwards");
+    const canvasDataField = document.getElementById("canvas-data-field");
+    const canvasImageField = document.getElementById("canvas-image-field");
     const canvas = new fabric.Canvas("fabricCanvas");
 
     let imageSize = 100;
 
-    if (savedCanvas) {
-      canvas.loadFromJSON(savedCanvas, canvas.renderAll.bind(canvas));
+    const resizeCanvas = () => {
+      canvas.setWidth(canvasContainer.offsetWidth);
+      canvas.setHeight(canvasContainer.offsetHeight);
+    };
+    resizeCanvas();
+
+    // Resize the canvas whenever the window is resized
+    window.addEventListener("resize", resizeCanvas);
+
+    console.log("window.location.href", window.location);
+    if (window.location.href.includes("edit")) {
+      console.log("editing");
+      const canvasJSON = JSON.parse(canvasDataField.value);
+      canvas.loadFromJSON(canvasJSON, canvas.renderAll.bind(canvas));
     }
+
+    // if (savedCanvas) {
+    // canvas.loadFromJSON(savedCanvas, canvas.renderAll.bind(canvas));
+    // }
 
     const addImage = (event) => {
       const pointer = canvas.getPointer(event.e);
@@ -43,7 +62,7 @@ export default class extends Controller {
       canvas.renderAll();
     };
 
-    const deleteImage = (event) => {
+    const deleteImage = (e) => {
       const activeObject = canvas.getActiveObject();
 
       // Check if an object is selected
@@ -115,6 +134,18 @@ export default class extends Controller {
       mouseSticker.style.opacity = 0;
     });
 
+    canvas.on("after:render", function () {
+      console.log("Canvas re-rendered");
+
+      const canvasJSON = canvas.toJSON();
+      console.log(JSON.stringify(canvasJSON));
+      canvasDataField.value = JSON.stringify(canvasJSON);
+    });
+
+    // canvas.on("object:modified", function () {
+    //   console.log("Canvas re-rendered");
+    // });
+
     stickerButton.forEach((button) => {
       button.addEventListener("click", (event) => {
         const newImage = (button.querySelector("img").src = event.target.src);
@@ -135,10 +166,27 @@ export default class extends Controller {
     });
 
     saveButton.addEventListener("click", (event) => {
-      const canvasJSON = canvas.toJSON();
-      localStorage.setItem("canvasState", JSON.stringify(canvasJSON));
+      const jpegDataURL = canvas.toDataURL({
+        format: "jpeg",
+        quality: 0.8, // Lower quality for smaller file size
+      });
 
-      console.log(canvasJSON);
+      console.log("jpegDataURL", jpegDataURL);
+      canvasImageField.value = jpegDataURL; // Set as hidden input's value
+
+      // Display the image in a new window (for testing)
+      // window.open(jpegDataURL);
+    });
+
+    const rangeSlider = document.getElementById("sticker-size");
+    console.log("rangeSlider", rangeSlider);
+    console.log("noUiSlider", noUiSlider);
+    noUiSlider.create(rangeSlider, {
+      start: [4000],
+      range: {
+        min: [2000],
+        max: [10000],
+      },
     });
   }
 }
