@@ -1,4 +1,4 @@
-<%= form_with model: @article,  local: true, html: { multipart: true } do |form| %>
+<%= form_with model: @article,  local: true, html: { multipart: true, id: "article-form"} do |form| %>
         <div class="mb-4">
             <div class="canvas-button-container d-flex flex-row pb-2 gap-1">
                 <% Dir.glob("#{Rails.root}/public/shrek/*").each do |image_path| %>
@@ -31,14 +31,10 @@
             </ul>
         </div>
 
-        <div class="mb-4">
-            <%= form.label :image, class: 'mb-2'%><br>
-            <%= form.file_field :image, class: 'form-control mb-2', id: 'canvas-image-field'%>
-            <% @article.errors.full_messages_for(:image).each do |message| %>
+         <!-- other article fields -->
+          <%= form.hidden_field :image, id: 'article-image' %>
 
-            <div class="ms-1 text-danger"><%= message %></div>
-            <% end %>
-        </div>
+
 
         <div class="mb-4">
             <%= form.label :canvas_data, class: 'mb-2'%><br>

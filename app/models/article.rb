@@ -7,6 +7,8 @@ class Article < ApplicationRecord
 
     validates :title, presence: true
     validates :body, presence: true, length: { minimum: 10 }
+    validates :image, presence: true
+
     
     has_many :likes, dependent: :destroy
     has_many :liked_by_users, through: :likes, source: :user 
@@ -14,7 +16,6 @@ class Article < ApplicationRecord
     has_many :taggings, dependent: :destroy
     has_many :tags, through: :taggings
 
-    mount_uploader :image, ImageUploader
     
     serialize :canvas_data, JSON
 

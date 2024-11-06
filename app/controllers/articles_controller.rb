@@ -30,6 +30,15 @@ class ArticlesController < ApplicationController
     # @article = Article.new(article_params)
     @article = current_user.articles.build(article_params)
 
+    # Get the base64 string from the form
+    base64_image = params[:article][:image]
+
+    # If there is a base64 image, upload it to Cloudinary
+    if base64_image.present?
+      uploaded_image = upload_to_cloudinary(base64_image)
+      @article.image = uploaded_image['secure_url'] # Store the Cloudinary URL
+    end
+
     if @article.save
       redirect_to @article
     else
@@ -59,6 +68,26 @@ class ArticlesController < ApplicationController
     @article.destroy
 
     redirect_to root_path, status: :see_other
+  end
+
+  def upload_to_cloudinary(base64_image)
+    # Remove the data URL prefix (if present)
+    base64_data = base64_image.gsub(/^data:image\/\w+;base64,/, '')
+
+    # Decode the base64 data
+    decoded_image = Base64.decode64(base64_data)
+
+    # Create a temporary file for uploading
+    tempfile = Tempfile.new(['upload', '.jpg'])
+    tempfile.binmode
+    tempfile.write(decoded_image)
+    tempfile.rewind
+
+    # Upload the image to Cloudinary
+    cloudinary_response = Cloudinary::Uploader.upload(tempfile.path, folder: 'articles/images')
+
+    # Return the response, which contains the URL
+    cloudinary_response
   end
 
   private

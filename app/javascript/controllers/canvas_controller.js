@@ -29,7 +29,7 @@ export default class extends Controller {
     // Resize the canvas whenever the window is resized
     window.addEventListener("resize", resizeCanvas);
 
-    console.log("window.location.href", window.location);
+    // console.log("window.location.href", window.location);
     if (window.location.href.includes("edit")) {
       console.log("editing");
       const canvasJSON = JSON.parse(canvasDataField.value);
@@ -80,7 +80,6 @@ export default class extends Controller {
     const handleMoveForwards = (event) => {
       const activeObject = canvas.getActiveObject();
 
-      console.log("activeObject", activeObject);
       // Check if an object is selected
       if (activeObject) {
         // Move the active object forward in the z-index
@@ -96,7 +95,6 @@ export default class extends Controller {
     const handleMoveBackwards = (event) => {
       const activeObject = canvas.getActiveObject();
 
-      console.log("activeObject", activeObject);
       // Check if an object is selected
       if (activeObject) {
         // Move the active object forward in the z-index
@@ -138,7 +136,7 @@ export default class extends Controller {
       console.log("Canvas re-rendered");
 
       const canvasJSON = canvas.toJSON();
-      console.log(JSON.stringify(canvasJSON));
+      // console.log(JSON.stringify(canvasJSON));
       canvasDataField.value = JSON.stringify(canvasJSON);
     });
 
@@ -171,7 +169,7 @@ export default class extends Controller {
         quality: 0.8, // Lower quality for smaller file size
       });
 
-      console.log("jpegDataURL", jpegDataURL);
+      // console.log("jpegDataURL", jpegDataURL);
       canvasImageField.value = jpegDataURL; // Set as hidden input's value
 
       // Display the image in a new window (for testing)
@@ -179,8 +177,8 @@ export default class extends Controller {
     });
 
     const rangeSlider = document.getElementById("sticker-size");
-    console.log("rangeSlider", rangeSlider);
-    console.log("noUiSlider", noUiSlider);
+    // console.log("rangeSlider", rangeSlider);
+    // console.log("noUiSlider", noUiSlider);
     noUiSlider.create(rangeSlider, {
       start: [4000],
       range: {
@@ -188,5 +186,22 @@ export default class extends Controller {
         max: [10000],
       },
     });
+
+    document
+      .getElementById("article-form")
+      .addEventListener("submit", function (e) {
+        // e.preventDefault();
+        // Prevent the default form submission
+        e.preventDefault();
+
+        // Get the base64 image from Fabric.js canvas
+        const base64Image = canvas.toDataURL({ format: "jpeg", quality: 0.8 });
+
+        // Set the base64 image string in the hidden field
+        document.getElementById("article-image").value = base64Image;
+
+        // Submit the form
+        this.submit();
+      });
   }
 }
