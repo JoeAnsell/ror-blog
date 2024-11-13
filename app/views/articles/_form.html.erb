@@ -36,19 +36,6 @@
 
 
 
-<%
-=begin%>
-<div class="mb-4">
-    <%= form.label :canvas_data, class: 'mb-2'%><br>
-    <%= form.text_field :canvas_data, class: 'form-control mb-2', id: 'canvas-data-field'%>
-    <% @article.errors.full_messages_for(:canvas_data).each do |message| %>
-
-    <div class="mb-2"><%= message %></div>
-    <% end %>
-</div>
-<%
-=end%>
-
 <div class="mb-4">
     <%= form.label :title, class: 'mb-2'%><br>
     <%= form.text_field :title, class: 'form-control mb-2'%>

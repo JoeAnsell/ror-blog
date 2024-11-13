@@ -17,7 +17,6 @@ class Article < ApplicationRecord
     has_many :tags, through: :taggings
 
     
-    serialize :canvas_data, JSON
 
 
 

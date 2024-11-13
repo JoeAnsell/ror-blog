@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :authenticate_user
+  before_action :authenticate_user, only: [:edit]
   before_action :authorize_user, only: [:edit]
 
 
@@ -111,7 +111,7 @@ class ArticlesController < ApplicationController
 
   private
     def article_params
-        params.require(:article).permit(:title, :body, :image, :status, :tag_list, :canvas_data)
+        params.require(:article).permit(:title, :body, :image, :status, :tag_list)
     end
 
 end

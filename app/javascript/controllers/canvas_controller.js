@@ -41,11 +41,11 @@ export default class extends Controller {
     window.addEventListener("resize", resizeCanvas);
 
     // console.log("window.location.href", window.location);
-    if (window.location.href.includes("edit")) {
-      console.log("editing");
-      const canvasJSON = JSON.parse(canvasDataField.value);
-      canvas.loadFromJSON(canvasJSON, canvas.renderAll.bind(canvas));
-    }
+    // if (window.location.href.includes("edit")) {
+    //   console.log("editing");
+    //   const canvasJSON = JSON.parse(canvasDataField.value);
+    //   canvas.loadFromJSON(canvasJSON, canvas.renderAll.bind(canvas));
+    // }
 
     // if (savedCanvas) {
     // canvas.loadFromJSON(savedCanvas, canvas.renderAll.bind(canvas));
@@ -143,13 +143,13 @@ export default class extends Controller {
       mouseSticker.style.opacity = 0;
     });
 
-    canvas.on("after:render", function () {
-      console.log("Canvas re-rendered");
+    // canvas.on("after:render", function () {
+    //   console.log("Canvas re-rendered");
 
-      const canvasJSON = canvas.toJSON();
-      // console.log(JSON.stringify(canvasJSON));
-      canvasDataField.value = JSON.stringify(canvasJSON);
-    });
+    //   const canvasJSON = canvas.toJSON();
+    //   // console.log(JSON.stringify(canvasJSON));
+    //   canvasDataField.value = JSON.stringify(canvasJSON);
+    // });
 
     // canvas.on("object:modified", function () {
     //   console.log("Canvas re-rendered");
