@@ -1,4 +1,7 @@
 class ArticlesController < ApplicationController
+  before_action :authenticate_user
+  before_action :authorize_user, only: [:edit]
+
 
   def index
     @articles = Article.all
@@ -50,6 +53,7 @@ class ArticlesController < ApplicationController
     puts "**************"
     puts params[:id]
 
+
     @article = Article.find(params[:id]) 
   end
 
@@ -88,6 +92,21 @@ class ArticlesController < ApplicationController
 
     # Return the response, which contains the URL
     cloudinary_response
+  end
+
+   # Checks if a user is logged in
+   def authenticate_user
+    unless current_user
+      redirect_to new_session_path, alert: "Please log in to edit this article."
+    end
+  end
+
+  # Checks if the logged-in user is the author of the article
+  def authorize_user
+    @article = Article.find(params[:id])
+    unless @article.user == current_user
+      redirect_to article_path(@article), alert: "You are not authorized to edit this article."
+    end
   end
 
   private
