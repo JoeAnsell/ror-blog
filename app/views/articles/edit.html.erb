@@ -1,4 +1,9 @@
 <h1>Edit Article</h1>
 
-    
-<%= render "form", article: @article %>
+<% if @article.image.present? %>
+<div class="mb-5">
+    <%= cl_image_tag(@article.image) %>
+</div>
+<% end %>
+
+<%= render "edit-form", article: @article %>
