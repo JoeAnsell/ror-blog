@@ -2,9 +2,9 @@
 @import "_reset.scss";
 @import "_custom.scss";
 @import "_canvas.scss";
+@import "_variables.scss";
+@import "_utilities.scss";
+
 @import "bootstrap/scss/bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons";
-
-canvas {
-  border: 2px solid red;
-}
+@import "base/forms";

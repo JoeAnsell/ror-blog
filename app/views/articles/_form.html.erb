@@ -34,38 +34,38 @@
 <!-- other article fields -->
 <%= form.hidden_field :image, id: 'article-image' %>
 
+<div class="form mx-auto">
+    <div class="mb-4">
+        <%= form.label :title, class: 'mb-2'%><br>
+        <%= form.text_field :title, class: 'form-control mb-2'%>
+        <% @article.errors.full_messages_for(:title).each do |message| %>
 
+        <div class="mb-2"><%= message %></div>
+        <% end %>
+    </div>
 
-<div class="mb-4">
-    <%= form.label :title, class: 'mb-2'%><br>
-    <%= form.text_field :title, class: 'form-control mb-2'%>
-    <% @article.errors.full_messages_for(:title).each do |message| %>
+    <div class="mb-4">
+        <%= form.label :body , class: 'mb-2'%>
+        <%= form.text_area :body, size: "70x5", class: 'form-control mb-2'%>
+        <% @article.errors.full_messages_for(:body).each do |message| %>
 
-    <div class="mb-2"><%= message %></div>
-    <% end %>
-</div>
+        <div class="ms-1 text-danger"><%= message %></div>
+        <% end %>
+    </div>
 
-<div class="mb-4">
-    <%= form.label :body , class: 'mb-2'%>
-    <%= form.text_area :body, size: "70x5", class: 'form-control mb-2'%>
-    <% @article.errors.full_messages_for(:body).each do |message| %>
+    <div class="mb-4">
+        <%= form.label :tags , "Tags (comma separated)", class: 'mb-2'%>
+        <%= form.text_field :tag_list, value: @article.tag_list, class: "form-control" %>
+    </div>
 
-    <div class="ms-1 text-danger"><%= message %></div>
-    <% end %>
-</div>
+    <div class="mb-5">
+        <%= form.label :status , class: 'mb-2'%><br>
+        <%= form.select :status, Visible::VALID_STATUSES, { selected: article.status || 'public' }, { class: "form-select" } %>
+    </div>
 
-<div class="mb-4">
-    <%= form.label :tags , "Tags (comma separated)", class: 'mb-2'%>
-    <%= form.text_field :tag_list, value: @article.tag_list, class: "form-control" %>
-</div>
+    <div>
+        <%= form.submit class: "btn btn-primary"%>
+    </div>
 
-<div class="mb-5">
-    <%= form.label :status , class: 'mb-2'%><br>
-    <%= form.select :status, Visible::VALID_STATUSES, { selected: article.status || 'public' }, { class: "form-select" } %>
-</div>
-
-<div>
-    <%= form.submit class: "btn btn-primary"%>
-</div>
 </div>
 <% end %>

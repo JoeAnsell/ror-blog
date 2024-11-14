@@ -1,51 +1,52 @@
 <h1> <%= @article.title %> </h1>
 <p><strong>Author:</strong> <%= @user_name %>
 
-<% if @article.image.present? %>
-  <div class="mb-5">
-    <%= cl_image_tag(@article.image) %>
-  </div>
+    <% if @article.image.present? %>
+<div class="my-5 vh-75">
+    <%= cl_image_tag(@article.image, class: "v-100 h-100 object-fit-contain mx-auto") %>
+</div>
 <% end %>
 
 <p> <%= @article.body %> </p>
 
 <p>
-  <strong>Tags:</strong>
-  <%= @article.tags.map { |t| link_to t.name, tag_path(t.name) }.join(", ").html_safe %>
+    <strong>Tags:</strong>
+    <%= @article.tags.map { |t| link_to t.name, tag_path(t.name) }.join(", ").html_safe %>
 </p>
 <br>
 <hr>
 <br>
 
 <% if current_user && current_user.id == @article.user_id %>
-    <div class="d-flex gap-4 mb-5 ps-0">
-        <div class="me-auto">
-          <% if current_user && @article.liked_by_users.include?(current_user) %>
-            <%= button_to 'Unlike', article_likes_path(@article), method: :delete, remote: true, class: "btn btn-warning", id: "like-button" %>
-          <% else %>
-            <%= button_to 'Like', article_likes_path(@article), remote: true, class: "btn btn-success", id: "like-button"%>
-          <% end %>
-          <p id="like-count" class="mt-2"><%= @article.likes.count %> Likes</p>
-        </div>
-        <div><%= link_to "Edit", edit_article_path(@article), class: "btn btn-primary"%></div> 
-        <div><%= button_to "Destroy", 
+<div class="d-flex gap-4 mb-5 ps-0">
+    <div class="me-auto">
+        <% if current_user && @article.liked_by_users.include?(current_user) %>
+        <%= button_to 'Unlike', article_likes_path(@article), method: :delete, remote: true, class: "btn btn-warning", id: "like-button" %>
+        <% else %>
+        <%= button_to 'Like', article_likes_path(@article), remote: true, class: "btn btn-success", id: "like-button"%>
+        <% end %>
+        <p id="like-count" class="mt-2"><%= @article.likes.count %> Likes</p>
+    </div>
+    <div><%= link_to "Edit", edit_article_path(@article), class: "btn btn-primary"%></div>
+    <div><%= button_to "Destroy", 
             article_path(@article), 
             method: :delete, 
             data: {confirm: "Are you sure?"},
             class: "btn btn-danger" 
         %></div>
-    </div>
+</div>
 <% end %>
 
+<div class="form mx-auto">
+    <div class="mb-5">
+        <h2 class="mb-4">Comments</h2>
+        <%= render @article.comments %>
+    </div>
 
-<div class="mb-5">
-    <h2 class="mb-4">Comments</h2>
-    <%= render @article.comments %>
-</div>
+    <div class="rounded p-4 bg-light w-auto mw-50">
 
-<div class="rounded p-4 bg-light w-auto mw-50">
+        <h3 class="mb-4">Add a comment:</h3>
+        <%= render 'comments/form' %>
 
-    <h3 class="mb-4">Add a comment:</h3>
-    <%= render 'comments/form' %>
-
+    </div>
 </div>
