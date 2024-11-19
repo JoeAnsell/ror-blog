@@ -1,13 +1,14 @@
 <h1 class="mb-4">Search</h1>
 
-<h3 class="mb-3">articles</h3>
-
 <!-- Search Form -->
-<div>
-  <input type="text" id="search-input" placeholder="Search by article title" class="form-control mb-2"/>
-</div>
+<div class="container">
+    <h3 class="mb-3">articles</h3>
+    <div>
+        <input type="text" id="search-input" placeholder="Search by article title" class="form-control mb-2" />
+    </div>
 
-<!-- Search Results -->
-<div id="article-results">
-  <%= render partial: 'shared/articles_list', locals: { articles: @articles } %>
+    <!-- Search Results -->
+    <div id="article-results ">
+        <%= render partial: 'shared/articles_list', locals: { articles: @articles } %>
+    </div>
 </div>

@@ -1,7 +1,6 @@
 // app/javascript/controllers/canvas_controller.js
 import { Controller } from "@hotwired/stimulus";
 import { fabric } from "fabric"; // browser
-import noUiSlider from "nouislider";
 
 export default class extends Controller {
   connect() {
@@ -16,6 +15,7 @@ export default class extends Controller {
     const moveBackwards = document.getElementById("move-backwards");
     const canvasDataField = document.getElementById("canvas-data-field");
     const canvasImageField = document.getElementById("canvas-image-field");
+    const stickerSize = document.getElementById("sticker-size");
     const canvas = new fabric.Canvas("fabricCanvas");
 
     const bg = new fabric.Rect({
@@ -60,13 +60,13 @@ export default class extends Controller {
         });
         img.scaleToWidth(imageSize);
         img.scaleToHeight(imageSize);
-        img.on("mouseover", function () {
-          mouseSticker.style.opacity = 0;
-        });
+        // img.on("mouseover", function () {
+        //   mouseSticker.style.opacity = 0;
+        // });
 
-        img.on("mouseout", function () {
-          mouseSticker.style.opacity = 0.25;
-        });
+        // img.on("mouseout", function () {
+        //   mouseSticker.style.opacity = 0.25;
+        // });
 
         canvas.add(img);
       });
@@ -123,7 +123,7 @@ export default class extends Controller {
       mouseSticker.style.opacity = 0.25;
     });
 
-    mouseSticker.style.width = `${imageSize}px`;
+    mouseSticker.style.width = `auto`;
     mouseSticker.style.height = `${imageSize}px`;
 
     canvasContainer.addEventListener("mousemove", (event) => {
@@ -174,28 +174,22 @@ export default class extends Controller {
       handleMoveBackwards();
     });
 
-    saveButton.addEventListener("click", (event) => {
-      const jpegDataURL = canvas.toDataURL({
-        format: "jpeg",
-        quality: 0.8, // Lower quality for smaller file size
-      });
+    // saveButton.addEventListener("click", (event) => {
+    //   const jpegDataURL = canvas.toDataURL({
+    //     format: "jpeg",
+    //     quality: 0.8, // Lower quality for smaller file size
+    //   });
 
-      // console.log("jpegDataURL", jpegDataURL);
-      canvasImageField.value = jpegDataURL; // Set as hidden input's value
+    //   // console.log("jpegDataURL", jpegDataURL);
+    //   canvasImageField.value = jpegDataURL; // Set as hidden input's value
 
-      // Display the image in a new window (for testing)
-      // window.open(jpegDataURL);
-    });
+    //   // Display the image in a new window (for testing)
+    //   // window.open(jpegDataURL);
+    // });
 
-    const rangeSlider = document.getElementById("sticker-size");
-    // console.log("rangeSlider", rangeSlider);
-    // console.log("noUiSlider", noUiSlider);
-    noUiSlider.create(rangeSlider, {
-      start: [4000],
-      range: {
-        min: [2000],
-        max: [10000],
-      },
+    stickerSize.addEventListener("input", function (e) {
+      imageSize = e.target.value;
+      mouseSticker.style.height = `${imageSize}px`;
     });
 
     document
