@@ -16,7 +16,9 @@ export default class extends Controller {
     const canvasDataField = document.getElementById("canvas-data-field");
     const canvasImageField = document.getElementById("canvas-image-field");
     const stickerSize = document.getElementById("sticker-size");
-    const canvas = new fabric.Canvas("fabricCanvas");
+    const canvas = new fabric.Canvas("fabricCanvas", {
+      backgroundColor: "#fff",
+    });
 
     const bg = new fabric.Rect({
       left: -1,
@@ -27,7 +29,7 @@ export default class extends Controller {
       selectable: false, // prevent the rectangle from being selected
     });
 
-    canvas.add(bg);
+    // canvas.add(bg);
 
     let imageSize = 100;
 

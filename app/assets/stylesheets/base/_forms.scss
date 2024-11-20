@@ -1,3 +1,7 @@
 .form {
   max-width: map-get($grid-breakpoints, sm);
 }
+
+.container {
+  max-width: map-get($grid-breakpoints, sm);
+}

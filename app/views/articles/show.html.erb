@@ -1,14 +1,14 @@
 <h1> <%= @article.title %> </h1>
-<div class="container">
-    <p class="text-center"><strong>Author:</strong> <%= @user_name %>
+<div>
+    <p class="text-center container"><strong>Author:</strong> <%= @user_name %>
 
         <% if @article.image.present? %>
     <div class="my-5">
-        <%= cl_image_tag(@article.image, class: "v-100 h-100 object-fit-contain mx-auto") %>
+        <%= cl_image_tag(@article.image, class: "border v-100 h-100 object-fit-contain mx-auto") %>
     </div>
     <% end %>
 
-    <div class="mx-auto article-body">
+    <div class="mx-auto article-body container">
         <p> <%= @article.body %> </p>
         <p>
             <strong>Tags:</strong>
