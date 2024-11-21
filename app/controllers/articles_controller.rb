@@ -19,7 +19,7 @@ class ArticlesController < ApplicationController
     @user = User.find_by(id: @user_id)
 
     if @user
-      @user_name = @user.email
+      @user_name = @user.user_name ? @user.user_name : @user.email
     else
       @user_name = "No Name"  # or handle the case when the user is nil
     end

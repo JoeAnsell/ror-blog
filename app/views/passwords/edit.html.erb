@@ -3,7 +3,7 @@
 <%= form_with model: current_user, url: password_path, html: { class: "form container" } do |form| %>
 
 <% if form.object.errors.any? %>
-<div class="alert alert-danger">
+<div class="mx-auto alert alert-danger">
     <% form.object.errors.full_messages.each do |message| %>
     <div><%= message %></div>
     <% end %>
