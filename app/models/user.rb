@@ -5,12 +5,14 @@ class User < ApplicationRecord
 
   validates :user_name, uniqueness: true
 
+  validates :avatar, presence: true
+
   validates :email, presence: true, uniqueness: true
   normalizes :email, with: ->(email) {email.strip.downcase}
   
   validates_format_of :email,  with: /\A[^@\s]+@[^@\s]+\z/, message: "Must be a valid email address"
-  validates :password, presence: true
-  validates :password_confirmation, presence: true
+  validates :password, presence: true, if: :password_required?
+  validates :password_confirmation, presence: true, if: :password_required?
 
   generates_token_for :password_reset, expires_in: 15.minutes do
     password_salt&.last(10)
@@ -25,4 +27,9 @@ class User < ApplicationRecord
 
   has_many :likes, dependent: :destroy
   has_many :liked_articles, through: :likes, source: :article
+
+  private
+  def password_required?
+    new_record? || password.present?
+  end
 end

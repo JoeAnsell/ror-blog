@@ -1,6 +1,6 @@
 <h1 class="mb-5"> Sign Up Page </h1>
 
-<%= form_with model: @user, url: registration_path,  html: { class: "form container" } do |form| %>
+<%= form_with model: @user, url: registration_path,  html: { class: "form container", multipart: true } do |form| %>
 
 <% if form.object.errors.any? %>
 <div class="mx-autoalert alert-danger">
@@ -9,27 +9,34 @@
     <% end %>
 </div>
 <% end %>
-<div class="mb-3">
+
+
+<div class="mb-4">
+    <%= form.label :avatar , class: 'mb-2'%>
+    <%= form.file_field :avatar, class: 'form-control mb-2'%>
+</div>
+
+<div class="mb-4">
     <%= form.label :email %>
     <%= form.text_field :email, class: "form-control", placeholder: "myname@gmail.com"%>
 </div>
 
-<div class="mb-3">
+<div class="mb-4">
     <%= form.label :user_name %>
     <%= form.text_field :user_name, class: "form-control", placeholder: "KingEgg"%>
 </div>
 
-<div class="mb-3">
+<div class="mb-4">
     <%= form.label :password %>
     <%= form.password_field :password, class: "form-control", placeholder: "string password please"%>
 </div>
 
-<div class="mb-3">
+<div class="mb-4">
     <%= form.label :password_confirmation %>
     <%= form.password_field :password_confirmation, class: "form-control", placeholder: "string password please"%>
 </div>
 
-<div class="mb-3">
+<div class="mb-4">
     <%= form.submit "Sign up", class: "btn btn-primary" %>
 </div>
 

@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   resource :password_reset
   resource :password
 
-  resources :users, only: [:edit, :update]
+  resources :users
 
   get 'search', to: 'search#index'
   get 'search_articles', to: 'search#search_articles'
