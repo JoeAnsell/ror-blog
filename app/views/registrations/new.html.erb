@@ -1,34 +1,36 @@
-<h1> Sign Up Page </h1>
+<h1 class="mb-5"> Sign Up Page </h1>
 
-<%= form_with model: @user, url: registration_path do |form| %>
+<%= form_with model: @user, url: registration_path,  html: { class: "form container" } do |form| %>
 
-    <% if form.object.errors.any? %>
-        <div class="alert alert-danger">
-            <% form.object.errors.full_messages.each do |message| %>
-            <div><%= message %></div>
-            <% end %>
-        </div>
+<% if form.object.errors.any? %>
+<div class="alert alert-danger">
+    <% form.object.errors.full_messages.each do |message| %>
+    <div><%= message %></div>
     <% end %>
-    <div class="mb-3">
-        <%= form.label :email %>
-        <%= form.text_field :email, class: "form-control", placeholder: "myname@gmail.com"%>
-    </div>
+</div>
+<% end %>
+<div class="mb-3">
+    <%= form.label :email %>
+    <%= form.text_field :email, class: "form-control", placeholder: "myname@gmail.com"%>
+</div>
 
-    <div class="mb-3">
-        <%= form.label :password %>
-        <%= form.password_field :password, class: "form-control", placeholder: "string password please"%>
-    </div>
+<div class="mb-3">
+    <%= form.label :user_name %>
+    <%= form.text_field :user_name, class: "form-control", placeholder: "KingEgg"%>
+</div>
 
-    <div class="mb-3">
-        <%= form.label :password_confirmation %>
-        <%= form.password_field :password_confirmation, class: "form-control", placeholder: "string password please"%>
-    </div>
+<div class="mb-3">
+    <%= form.label :password %>
+    <%= form.password_field :password, class: "form-control", placeholder: "string password please"%>
+</div>
 
-    <div class="mb-3">
-        <%= form.submit "Sign up", class: "btn btn-primary" %>
-    </div>
+<div class="mb-3">
+    <%= form.label :password_confirmation %>
+    <%= form.password_field :password_confirmation, class: "form-control", placeholder: "string password please"%>
+</div>
+
+<div class="mb-3">
+    <%= form.submit "Sign up", class: "btn btn-primary" %>
+</div>
 
 <% end %>
-
-
-

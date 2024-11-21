@@ -3,7 +3,9 @@ class User < ApplicationRecord
   include ActiveModel::SecurePassword
   has_secure_password
 
-  validates :email, presence: true
+  validates :user_name, uniqueness: true
+
+  validates :email, presence: true, uniqueness: true
   normalizes :email, with: ->(email) {email.strip.downcase}
   
   validates_format_of :email,  with: /\A[^@\s]+@[^@\s]+\z/, message: "Must be a valid email address"
