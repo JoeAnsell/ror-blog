@@ -32,7 +32,7 @@
                             <%= link_to "Make Eggs", new_article_path, class: "nav-link" %>
                         </li>
                         <li class="nav-item ">
-                            <%= link_to "Edit Password", edit_password_path, class: "nav-link" %>
+                            <%= link_to "Edit Profile", user_path(current_user.id), class: "nav-link" %>
                         </li>
                         <li class="nav-item ">
                             <%= button_to "Log Out", session_path, method: :delete, class: "nav-link"%>

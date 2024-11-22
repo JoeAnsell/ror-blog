@@ -14,12 +14,10 @@ export default class extends Controller {
           event.preventDefault();
           if (userProfileForm.style.display === "none") {
             userProfileForm.style.display = "block";
-            editButton.innerHTML = "Close Edit Profile";
             userProfileContainer.style.display = "none";
           } else {
             userProfileContainer.style.display = "block";
             userProfileForm.style.display = "none";
-            editButton.innerHTML = "Edit Profile";
           }
         });
       });

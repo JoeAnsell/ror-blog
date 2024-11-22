@@ -11,9 +11,13 @@
 
         <p><strong>Username:</strong> <%= @user.user_name %></p>
         <p><strong>Email:</strong> <%= @user.email %></p>
-        <button class="btn btn-primary edit-user-profile-btn" id="edit-user-profile-btn">Edit Profile</button>
+
+        <% if current_user && current_user.id == @user.id %>
+        <button class="btn btn-primary edit-user-profile-btn">Edit Profile</button>
+        <% end %>
     </div>
 
+    <% if current_user && current_user.id == @user.id %>
     <%= form_for @user, url: user_path(@user), html: { multipart: true,  id: "user-profile-form", style: "display: none" } do |f| %>
 
     <div class="form-grou mb-4">
@@ -33,7 +37,8 @@
 
     <div class="d-flex gap-2">
         <%= f.submit "Save Changes", class: "btn btn-success" %>
-        <button type="button" class="btn btn-primary edit-user-profile-btn" id="edit-user-profile-btn">Return</button>
+        <button type="button" class="btn btn-primary edit-user-profile-btn">Return</button>
     </div>
+    <% end %>
     <% end %>
 </div>
