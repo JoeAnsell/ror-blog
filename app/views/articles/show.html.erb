@@ -16,23 +16,25 @@
     <br>
     <hr>
     <br>
-    <% if current_user && current_user.id == @article.user_id %>
+    <% if current_user%>
     <div class="d-flex gap-4 mb-5 ps-0">
         <div class="me-auto">
             <% if current_user && @article.liked_by_users.include?(current_user) %>
-            <%= button_to 'Unlike', article_likes_path(@article), method: :delete, remote: true, class: "btn btn-warning", id: "like-button" %>
+            <%= button_to 'Unlike', article_likes_path(@article), method: :delete, class: "btn btn-warning", id: "like-button",  data: { prevent_scroll: true, controller: "form" }%>
             <% else %>
-            <%= button_to 'Like', article_likes_path(@article), remote: true, class: "btn btn-success", id: "like-button"%>
+            <%= button_to 'Like', article_likes_path(@article), class: "btn btn-success", id: "like-button",  data: { prevent_scroll: true, controller: "form"  }%>
             <% end %>
             <p id="like-count" class="mt-2"><%= @article.likes.count %> Likes</p>
         </div>
+        <% if current_user && current_user.id == @article.user_id %>
         <div><%= link_to "Edit", edit_article_path(@article), class: "btn btn-primary"%></div>
         <div><%= button_to "Destroy", 
-            article_path(@article), 
-            method: :delete, 
-            data: {confirm: "Are you sure?"},
-            class: "btn btn-danger" 
-        %></div>
+                article_path(@article), 
+                method: :delete, 
+                data: {confirm: "Are you sure?"},
+                class: "btn btn-danger" 
+            %></div>
+        <% end %>
     </div>
     <% end %>
 

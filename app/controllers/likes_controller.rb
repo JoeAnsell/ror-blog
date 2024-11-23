@@ -6,7 +6,7 @@ class LikesController < ApplicationController
     @article.likes.create(user: current_user)
     # Update button without refreshing page
     respond_to do |format|
-      format.html { redirect_to @article }
+      # format.html { redirect_to @article }
       format.js   # Render a JavaScript file (create.js.erb)
     end
   end
@@ -16,7 +16,7 @@ class LikesController < ApplicationController
     @article.likes.find_by(user: current_user)&.destroy
     # Update button without refreshing page
     respond_to do |format|
-      format.html { redirect_to @article }
+      # format.html { redirect_to @article }
       format.js   # Render a JavaScript file (destroy.js.erb) 
     end
   end
