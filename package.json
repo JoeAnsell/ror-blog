@@ -5,6 +5,7 @@
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.10",
     "@popperjs/core": "^2.11.8",
+    "@rails/webpacker": "5.4.4",
     "@stimulus-components/content-loader": "^5.0.0",
     "autoprefixer": "^10.4.20",
     "bootstrap": "^5.3.3",
@@ -13,7 +14,9 @@
     "nodemon": "^3.1.6",
     "postcss": "^8.4.47",
     "postcss-cli": "^11.0.0",
-    "sass": "^1.79.2"
+    "sass": "^1.79.2",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^3.3.12"
   },
   "scripts": {
     "build:css:compile": "sass ./app/assets/stylesheets/application.sass.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules",
@@ -26,6 +29,7 @@
     "defaults"
   ],
   "devDependencies": {
-    "esbuild": "^0.23.1"
+    "esbuild": "^0.23.1",
+    "webpack-dev-server": "^3"
   }
 }

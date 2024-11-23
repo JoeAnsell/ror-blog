@@ -79,6 +79,7 @@ gem 'cloudinary', '~> 2.2'
 
 gem 'carrierwave', '~> 2.0'
 
+gem 'webpacker'
 
 
 
