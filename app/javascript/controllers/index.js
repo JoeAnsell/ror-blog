@@ -1,4 +1,4 @@
-import { application } from "./application.js";
+import { application } from "./application";
 
 import CanvasController from "./canvas_controller.js";
 application.register("canvas", CanvasController);

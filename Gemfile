@@ -69,19 +69,17 @@ end
 
 gem "cssbundling-rails"
 
-gem "bootstrap"
 
-gem "jsbundling-rails", "~> 1.3"
+gem "jsbundling-rails"
+
+
+gem "bootstrap"
 
 gem "puts_debuggerer", "~> 1.0"
 
 gem 'cloudinary', '~> 2.2'
 
 gem 'carrierwave', '~> 2.0'
-
-gem 'webpacker'
-
-
 
 
 gem "dockerfile-rails", ">= 1.6", :group => :development
