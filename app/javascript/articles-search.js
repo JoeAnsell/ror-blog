@@ -1,6 +1,5 @@
 document.addEventListener("turbo:load", function () {
   const searchInput = document.getElementById("search-input");
-  console.log("frog");
 
   if (searchInput) {
     searchInput.addEventListener("input", function () {
