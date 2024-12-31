@@ -14,6 +14,8 @@ export default class extends Controller {
     const canvasDataField = document.getElementById("canvas-data-field");
     const canvasImageField = document.getElementById("canvas-image-field");
     const stickerSize = document.getElementById("sticker-size");
+    const stickerSizeMax = stickerSize.max;
+    const stickerSizeMin = stickerSize.min;
     const canvas = new fabric.Canvas("fabricCanvas", {
       backgroundColor: "#fff",
       preserveObjectStacking: true, // Keeps object stacking order intact
@@ -30,6 +32,9 @@ export default class extends Controller {
     // Resize the canvas whenever the window is resized
     window.addEventListener("resize", resizeCanvas);
 
+    mouseSticker.style.width = `auto`;
+    mouseSticker.style.height = `${imageSize}px`;
+
     // console.log("window.location.href", window.location);
     // if (window.location.href.includes("edit")) {
     //   console.log("editing");
@@ -41,6 +46,9 @@ export default class extends Controller {
     // canvas.loadFromJSON(savedCanvas, canvas.renderAll.bind(canvas));
     // }
 
+    // ------------ End of Canvas Setup -------------//
+
+    // ------------ Contol functions -------------//
     const addImage = (event) => {
       const pointer = canvas.getPointer(event.e);
       new fabric.Image.fromURL(mouseSticker.src, (img) => {
@@ -101,8 +109,27 @@ export default class extends Controller {
       }
     };
 
-    mouseSticker.style.width = `auto`;
-    mouseSticker.style.height = `${imageSize}px`;
+    const handleIncreaseMouseStickerSize = () => {
+      if (imageSize >= stickerSizeMax) {
+        return;
+      } else {
+        imageSize = imageSize + 10;
+        stickerSize.value = imageSize;
+        mouseSticker.style.height = `${imageSize}px`;
+      }
+    };
+
+    const handleDecreaseMouseStickerSize = () => {
+      if (imageSize <= stickerSizeMin) {
+        return;
+      } else {
+        imageSize = imageSize - 10;
+        stickerSize.value = imageSize;
+        mouseSticker.style.height = `${imageSize}px`;
+      }
+    };
+
+    // ------------ End of Contol functions -------------//
 
     canvasContainer.addEventListener("mousemove", (event) => {
       const rect = canvasContainer.getBoundingClientRect();
@@ -121,18 +148,6 @@ export default class extends Controller {
     canvasContainer.addEventListener("mouseleave", (event) => {
       mouseSticker.style.display = "none";
     });
-
-    // canvas.on("after:render", function () {
-    //   console.log("Canvas re-rendered");
-
-    //   const canvasJSON = canvas.toJSON();
-    //   // console.log(JSON.stringify(canvasJSON));
-    //   canvasDataField.value = JSON.stringify(canvasJSON);
-    // });
-
-    // canvas.on("object:modified", function () {
-    //   console.log("Canvas re-rendered");
-    // });
 
     stickerButton.forEach((button) => {
       button.addEventListener("click", (event) => {
@@ -153,20 +168,8 @@ export default class extends Controller {
       handleMoveBackwards();
     });
 
-    // saveButton.addEventListener("click", (event) => {
-    //   const jpegDataURL = canvas.toDataURL({
-    //     format: "jpeg",
-    //     quality: 0.8, // Lower quality for smaller file size
-    //   });
-
-    //   // console.log("jpegDataURL", jpegDataURL);
-    //   canvasImageField.value = jpegDataURL; // Set as hidden input's value
-
-    //   // Display the image in a new window (for testing)
-    //   // window.open(jpegDataURL);
-    // });
-
     stickerSize.addEventListener("input", function (e) {
+      console.log(e.target.value);
       imageSize = e.target.value;
       mouseSticker.style.height = `${imageSize}px`;
     });
@@ -209,6 +212,12 @@ export default class extends Controller {
       if (event.key === "[") {
         handleMoveBackwards();
       }
+      if (event.key === "+") {
+        handleIncreaseMouseStickerSize();
+      }
+      if (event.key === "-") {
+        handleDecreaseMouseStickerSize();
+      }
     });
     //------------ End of Keyboard Events -------------//
 
@@ -229,3 +238,16 @@ export default class extends Controller {
       });
   }
 }
+
+// saveButton.addEventListener("click", (event) => {
+//   const jpegDataURL = canvas.toDataURL({
+//     format: "jpeg",
+//     quality: 0.8, // Lower quality for smaller file size
+//   });
+
+//   // console.log("jpegDataURL", jpegDataURL);
+//   canvasImageField.value = jpegDataURL; // Set as hidden input's value
+
+//   // Display the image in a new window (for testing)
+//   // window.open(jpegDataURL);
+// });
