@@ -5,8 +5,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    puts "*****************"
-    puts user_params
 
     avatar_image = user_params[:avatar]
 
@@ -32,6 +30,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @live_articles = current_user.articles.where(status: 'published')
+    @draft_articles = current_user.articles.where(status: 'draft').or(current_user.articles.where(status: nil))
+
+    puts "**********"
+    puts @live_articles
+    puts @draft_articles
   end
 
   private

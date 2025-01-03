@@ -3,21 +3,21 @@
 <div class="container" data-controller="user">
 
     <div class="user-profile-container" id="user-profile-container">
-        <% if @user.avatar? %>
+        <% if current_user.avatar? %>
         <div class="mb-2 h-100 image">
-            <%= cl_image_tag(@user.avatar, width: 100) %>
+            <%= cl_image_tag(@user.avatar, width: 100, class: "rounded-circle") %>
         </div>
         <% end %>
 
-        <p><strong>Username:</strong> <%= @user.user_name %></p>
-        <p><strong>Email:</strong> <%= @user.email %></p>
+        <p><strong>Username:</strong> <%= current_user.user_name %></p>
+        <p><strong>Email:</strong> <%= current_user.email %></p>
 
-        <% if current_user && current_user.id == @user.id %>
+        <% if current_user && current_user.id == current_user.id %>
         <button class="btn btn-primary edit-user-profile-btn">Edit Profile</button>
         <% end %>
     </div>
 
-    <% if current_user && current_user.id == @user.id %>
+    <% if current_user && current_user.id == current_user.id %>
     <%= form_for @user, url: user_path(@user), html: { multipart: true,  id: "user-profile-form", style: "display: none" } do |f| %>
 
     <div class="form-grou mb-4">
@@ -41,4 +41,33 @@
     </div>
     <% end %>
     <% end %>
+
+
+    <h2 class="mt-4">Published Articles</h2>
+    <%if @live_articles.length == 0 %>
+    <p>No published articles yet.</p>
+    <% else %>
+    <ul class="list-group mt-4 container">
+        <% @live_articles.each do |article| %>
+        <li class="p-0 list-group-item list-group-item-action">
+            <%= link_to article.title, article, class: "d-block px-3 py-2 text-decoration-none" %>
+        </li>
+        <% end %>
+        <% end %>
+    </ul>
+    <br>
+
+    <h2>Drafts Articles</h2>
+    <%if @draft_articles.length == 0 %>
+    <p>No draft articles yet.</p>
+    <% else %>
+    <% @draft_articles.each do |article| %>
+    <ul class="list-group mt-4 container">
+        <li class="list-group-item list-group-item-action">
+            <%= link_to article.title, article %>
+        </li>
+    </ul>
+    <% end %>
+    <% end %>
+    </ul>
 </div>
