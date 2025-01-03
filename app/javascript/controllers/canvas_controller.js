@@ -11,6 +11,13 @@ export default class extends Controller {
     const deleteButton = document.getElementById("delete-button");
     const moveForward = document.getElementById("move-forwards");
     const moveBackwards = document.getElementById("move-backwards");
+    const increaseStickerSize = document.getElementById(
+      "increase-sticker-size"
+    );
+    const decreaseStickerSize = document.getElementById(
+      "decrease-sticker-size"
+    );
+
     const canvasDataField = document.getElementById("canvas-data-field");
     const canvasImageField = document.getElementById("canvas-image-field");
     const stickerSize = document.getElementById("sticker-size");
@@ -156,18 +163,6 @@ export default class extends Controller {
       });
     });
 
-    deleteButton.addEventListener("click", function () {
-      deleteImage();
-    });
-
-    moveForward.addEventListener("click", function () {
-      handleMoveForwards();
-    });
-
-    moveBackwards.addEventListener("click", function () {
-      handleMoveBackwards();
-    });
-
     stickerSize.addEventListener("input", function (e) {
       console.log(e.target.value);
       imageSize = e.target.value;
@@ -199,6 +194,30 @@ export default class extends Controller {
     });
 
     //------------ End of Canvas Events -------------//
+
+    //------------ Button Events -------------//
+
+    deleteButton.addEventListener("click", function () {
+      deleteImage();
+    });
+
+    moveForward.addEventListener("click", function () {
+      handleMoveForwards();
+    });
+
+    moveBackwards.addEventListener("click", function () {
+      handleMoveBackwards();
+    });
+
+    increaseStickerSize.addEventListener("click", function () {
+      handleIncreaseMouseStickerSize();
+    });
+
+    decreaseStickerSize.addEventListener("click", function () {
+      handleDecreaseMouseStickerSize();
+    });
+
+    //------------ End of Button Events -------------//
 
     //------------ Keyboard Events -------------//
     window.addEventListener("keydown", (event) => {
