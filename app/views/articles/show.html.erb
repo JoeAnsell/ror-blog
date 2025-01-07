@@ -3,17 +3,16 @@
 
     <% if @article.image.present? %>
 <div class="my-5">
-    <%= cl_image_tag(@article.image, class: "border v-100 h-100 object-fit-contain mx-auto") %>
+    <%= cl_image_tag(@article.image, class: "v-100 h-100 object-fit-contain mx-auto rounded-4 shadow") %>
 </div>
 <% end %>
 
 <div class="mx-auto article-body container">
-    <p> <%= @article.body %> </p>
+    <p class="mb-3"> <%= @article.body %> </p>
     <p>
         <strong>Tags:</strong>
-        <%= @article.tags.map { |t| link_to t.name, tag_path(t.name) }.join(", ").html_safe %>
+        <%= @article.tags.map { |t| link_to t.name, tag_path(t.name), class:'link-underline-primary' }.join(", ").html_safe %>
     </p>
-    <br>
     <hr>
     <br>
     <% if current_user%>
@@ -39,16 +38,18 @@
     <% end %>
 
     <div class="mx-auto">
-        <div class="mb-5">
-            <h2 class="mb-4">Comments</h2>
-            <%= render @article.comments %>
-        </div>
+        <h2 class="mb-4">Comments</h2>
+        <% if @article.comments.any? %>
+        <%= render @article.comments %>
+        <% else %>
+        <p class="ms-1">No comments yet.</p>
+        <% end %>
 
+        <% if current_user %>
         <div class="rounded p-4 bg-light w-auto mw-50">
-
             <h3 class="mb-4">Add a comment:</h3>
             <%= render 'comments/form' %>
-
         </div>
+        <% end %>
     </div>
 </div>

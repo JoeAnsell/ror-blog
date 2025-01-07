@@ -1,12 +1,10 @@
 <%= form_with model: [ @article, @article.comments.build ] do |form| %>
-    <p>
-        <%= form.label :body %><br>
-        <%= form.text_area :body, class: "form-control w-auto"%>
-    </p>
+
+<%= form.text_area :body, class: "form-control mb-4 w-100"%>
 
 
 
-    <div class="btn btn-primary">
-        <%= form.submit %>
-    </div>
+<div class="btn btn-primary">
+    <%= form.submit %>
+</div>
 <% end %>

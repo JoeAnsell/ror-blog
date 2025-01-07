@@ -1,7 +1,7 @@
 <ul class="list-group p-0 container articles-list">
     <% if articles.any? %>
     <% articles.each do |article| %>
-    <li class="list-group-item article-list-item list-group-item-action mb-5 rounded p-0 d-flex flex-align-start align-items-center overflow-hidden">
+    <li class="list-group-item article-list-item list-group-item-action mb-5 rounded p-0 d-flex flex-align-start align-items-center overflow-hidden shadow-sm">
         <a class="w-100 h-100 text-decoration-none" href="<%= article_path(article) %>">
             <% if article.image.present? %>
             <div class="h-100 image">
