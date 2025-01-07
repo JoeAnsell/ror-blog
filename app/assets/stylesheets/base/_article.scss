@@ -1,0 +1,16 @@
+.article-image-container {
+  .download-btn {
+    pointer-events: none;
+    opacity: 0;
+    transition: 0.25s;
+    transform: translateX(5px);
+  }
+  &:hover,
+  &:focus {
+    .download-btn {
+      pointer-events: all;
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}

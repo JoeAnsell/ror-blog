@@ -4,4 +4,5 @@ import "@hotwired/turbo-rails";
 import "bootstrap";
 
 import "./controllers/index.js";
-import "./articles-search"; // Assuming you have other scripts like articles-search
+import "./articles-search";
+import "./article";

@@ -2,8 +2,12 @@
 <p class="text-center container"><strong>Author:</strong> <%= @user_name %>
 
     <% if @article.image.present? %>
-<div class="my-5">
-    <%= cl_image_tag(@article.image, class: "v-100 h-100 object-fit-contain mx-auto rounded-4 shadow") %>
+<div class="my-5 text-center article-image-container">
+    <div class="object-fit-contain mx-auto d-inline-block position-relative">
+        <%= cl_image_tag(@article.image, id: "article-image", class: "v-100 h-100 rounded-4 shadow", alt: @article.title) %>
+
+        <button id="download-image-btn" class="download-btn position-absolute bottom-0 end-0 btn btn-primary me-2 mb-2"><i class="bi bi-box-arrow-down"></i></button>
+    </div>
 </div>
 <% end %>
 
