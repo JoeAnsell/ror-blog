@@ -20,12 +20,16 @@
     <%= render "layouts/nav" %>
 
     <main class="mx-auto pt-5 pb-6 px-3 md:px-5 ">
-        <% if notice %>
-        <div class="alert alert-success d-inline-block" role="alert"><%= notice %></div>
-        <% end %>
-        <% if alert %>
-        <div class="mx-auto alert alert-danger d-inline-block" role="alert"><%= alert %></div>
-        <% end %>
+
+        <div class="d-flex justify-content-center align-items-center">
+            <% if notice %>
+            <div class="mx-auto alert alert-success" role="alert"><%= notice %></div>
+            <% end %>
+            <% if alert %>
+            <div class="mx-auto alert alert-danger d-inline-block" role="alert"><%= alert %></div>
+            <% end %>
+        </div>
+
         <%= yield %>
     </main>
 </body>
