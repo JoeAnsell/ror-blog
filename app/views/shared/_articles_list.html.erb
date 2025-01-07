@@ -1,15 +1,16 @@
 <ul class="list-group p-0 container articles-list">
     <% if articles.any? %>
     <% articles.each do |article| %>
-    <li class="list-group-item article-list-item list-group-item-action mb-3 rounded border p-0 d-flex flex-align-start align-items-center overflow-hidden">
+    <li class="list-group-item article-list-item list-group-item-action mb-5 rounded p-0 d-flex flex-align-start align-items-center overflow-hidden">
         <a class="w-100 h-100 text-decoration-none" href="<%= article_path(article) %>">
             <% if article.image.present? %>
-            <div class="mb-2 h-100 image">
+            <div class="h-100 image">
                 <%= cl_image_tag(article.image, width: 100) %>
             </div>
             <% end %>
-            <div class="px-3 py-2">
-                <strong><%= article.title %></strong>
+            <div class="px-3 py-3 d-flex justify-content-between bg-light">
+                <p><strong><%= article.title %></strong></p>
+                <p class="text-secondary"><strong><%= article.created_at.strftime("%b %d, %Y")  %></strong></p>
             </div>
         </a>
     </li>
