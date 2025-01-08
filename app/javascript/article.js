@@ -1,8 +1,9 @@
 document.addEventListener("turbo:load", function () {
   //Download image btn click
-  document
-    .getElementById("download-image-btn")
-    .addEventListener("click", async function () {
+  const downloadImageBtn = document.getElementById("download-image-btn");
+
+  if (downloadImageBtn) {
+    downloadImageBtn.addEventListener("click", async function () {
       const imageElement = document.getElementById("article-image");
       const imageUrl = imageElement.src;
       const imageAlt = imageElement.alt;
@@ -18,4 +19,5 @@ document.addEventListener("turbo:load", function () {
       link.click();
       document.body.removeChild(link);
     });
+  }
 });

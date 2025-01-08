@@ -1,14 +1,8 @@
-<div class="mb-5">
-    <p class="mb-0">
-        <strong>Comment: </strong><%= comment.body %>
-    </p>
-    <p>
-        <strong>by: </strong> <%= comment.user.email %>
-    </p>
+<div class="mb-5 p-4 bg-light rounded">
+    <p class="fw-bold mb-1"><%= comment.user.user_name %></p>
+    <p class="fs-3 mb-3"><%= comment.body %></p>
 
     <% if comment.user == current_user %>
-    <p>
-        <%= link_to "Destroy Comment", [comment.article, comment],data: {turbo_method: :delete, turbo_confirm: "Are you sure"}%>
-    </p>
+    <%= link_to "Delete Comment", [comment.article, comment],data: {turbo_method: :delete, turbo_confirm: "Are you sure"}%>
     <% end %>
 </div>
