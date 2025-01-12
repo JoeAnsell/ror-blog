@@ -82,6 +82,3 @@ gem 'cloudinary', '~> 2.2'
 gem 'carrierwave', '~> 2.0'
 
 
-gem "dockerfile-rails", ">= 1.6", :group => :development
-
-gem "aws-sdk-s3", "~> 1.176", :require => false

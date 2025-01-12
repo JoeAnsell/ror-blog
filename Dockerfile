@@ -2,18 +2,17 @@
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
 ARG RUBY_VERSION=3.3.1
-FROM ruby:$RUBY_VERSION-slim AS base
+FROM ruby:$RUBY_VERSION-slim as base
 
-LABEL fly_launch_runtime="rails"
 
 # Rails app lives here
 WORKDIR /rails
 
 # Set production environment
-ENV BUNDLE_DEPLOYMENT="1" \
+ENV RAILS_ENV="production" \
+    BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development:test" \
-    RAILS_ENV="production"
+    BUNDLE_WITHOUT="development"
 
 # Update gems and bundler
 RUN gem update --system --no-document && \
