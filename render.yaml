@@ -1,6 +1,6 @@
 databases:
-  - name: mysite
-    databaseName: mysite
+  - name: makeEggs
+    databaseName: makeEggs
     user: mysite
     plan: free
 
