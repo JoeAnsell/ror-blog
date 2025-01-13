@@ -20,6 +20,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def update
+    @user.password_reset = true
     if @user.update(password_params)
       redirect_to new_session_path, notice: "Your password has been reset successfully. Please login"
     else

@@ -3,9 +3,9 @@ class User < ApplicationRecord
   include ActiveModel::SecurePassword
   has_secure_password
 
-  validates :user_name, uniqueness: true
-
-  validates :avatar, presence: true
+  validates :user_name, uniqueness: true, unless: :password_reset?
+  validates :name, uniqueness: true, unless: :password_reset?
+  validates :avatar, presence: true, unless: :password_reset? 
 
   validates :email, presence: true, uniqueness: true
   normalizes :email, with: ->(email) {email.strip.downcase}
@@ -27,6 +27,14 @@ class User < ApplicationRecord
 
   has_many :likes, dependent: :destroy
   has_many :liked_articles, through: :likes, source: :article
+
+  def password_reset?
+    @password_reset == true
+  end
+  
+  def password_reset=(value)
+    @password_reset = value
+  end
 
   private
   def password_required?
