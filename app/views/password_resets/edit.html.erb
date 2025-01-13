@@ -1,6 +1,6 @@
 <h1 class="mb-5"> Reset Your Password</h1>
 
-<%= form_with model: @user, url: password_reset_path(token: params[:token]) do |form| %>
+<%= form_with model: @user, url: password_reset_path(token: params[:token]),html: { class: "form container" } do |form| %>
 
 <% if form.object.errors.any? %>
 <div class="mx-auto alert alert-danger">

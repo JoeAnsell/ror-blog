@@ -80,7 +80,22 @@ Rails.application.configure do
   config.assets.check_precompiled_asset = false
 
 
-  config.action_mailer_default_url_options = { host: "localhost", port: 3000 }
+  # Use SMTP settings for sending emails
+config.action_mailer.delivery_method = :smtp
+
+# Specify default URL options for Action Mailer
+config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+# SMTP settings for Gmail (or another provider)
+config.action_mailer.smtp_settings = {
+  address: 'smtp.gmail.com',
+  port: 587,
+  domain: 'localhost:3000',
+  user_name: Rails.application.credentials.dig(:gmail, :user_name),
+  password: Rails.application.credentials.dig(:gmail, :password),
+  authentication: 'plain',
+  enable_starttls_auto: true
+}
 
   config.active_storage.service = :cloudinary
 
