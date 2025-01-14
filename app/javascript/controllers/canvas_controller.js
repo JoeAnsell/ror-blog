@@ -5,6 +5,10 @@ import { fabric } from "fabric"; // browser
 export default class extends Controller {
   connect() {
     const canvasContainer = document.getElementById("canvas-container");
+    if (!canvasContainer) {
+      return;
+    }
+
     const stickerButton = document.querySelectorAll(".sticker-button");
     const mouseSticker = document.getElementById("mouse-sticker");
     const saveButton = document.getElementById("save-button");
@@ -28,7 +32,7 @@ export default class extends Controller {
       preserveObjectStacking: true, // Keeps object stacking order intact
     });
 
-    let imageSize = 100;
+    let imageSize = 200;
 
     const resizeCanvas = () => {
       canvas.setWidth(canvasContainer.offsetWidth);
@@ -81,8 +85,6 @@ export default class extends Controller {
 
         // Re-render the canvas to show changes
         canvas.renderAll();
-      } else {
-        alert("Please select an image to delete.");
       }
     };
 

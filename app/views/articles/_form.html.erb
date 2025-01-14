@@ -15,26 +15,22 @@
             <canvas class="border" id="fabricCanvas" width="100%" height="100%"></canvas>
         </div>
 
-        <div class="d-flex justify-content-center align-items-center">
-            <input type="range" class=" sticker-size" id="sticker-size" min="30" max="400">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+            <button title="Increase sticker size" type="button" id="increase-sticker-size" class="sticker-btn mb-3 btn btn-primary"><i style="font-size: 15px;" class="bi bi-brush"></i></i></button>
+            <input type="range" class=" sticker-size" id="sticker-size" min="30" max="400" value="200">
+            <button title="Decrease sticker size" type="button" id="decrease-sticker-size" class="sticker-btn mt-3 btn btn-primary"><i style="font-size: 11px;" class="bi bi-brush"></i></i></button>
         </div>
     </div>
 
     <ul class="d-flex gap-2 mb-4 canvas-image-alt-btns">
         <li>
-            <button type="button" id="delete-button" class="mb-4 btn btn-primary">Delete</button>
+            <button title="Delete sticker" type="button" id="delete-button" class="sticker-btn mb-4 btn btn-primary"><i class="bi bi-trash3-fill"></i></button>
         </li>
         <li>
-            <button type="button" id="move-forwards" class="mb-4 btn btn-primary">Move forwards</button>
+            <button title="Move sticker infront" type="button" id="move-forwards" class="sticker-btn mb-4 btn btn-primary">Move forwards</button>
         </li>
         <li>
-            <button type="button" id="move-backwards" class="mb-4 btn btn-primary">Move backwards</button>
-        </li>
-        <li>
-            <button type="button" id="increase-sticker-size" class="mb-4 btn btn-primary">Bigger</button>
-        </li>
-        <li>
-            <button type="button" id="decrease-sticker-size" class="mb-4 btn btn-primary">Smaller</button>
+            <button title="Move sticker behind" type="button" id="move-backwards" class="sticker-btn mb-4 btn btn-primary">Move backwards</button>
         </li>
     </ul>
 </div>

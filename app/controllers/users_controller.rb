@@ -21,21 +21,23 @@ class UsersController < ApplicationController
     end
 
     if @user.update(user_params.except(:avatar)) # Exclude :avatar from direct update
+      puts "***THIS THING IS WORKING***"
       @user.save # Save the updated avatar URL
       redirect_to @user, notice: 'User information was successfully updated.'
     else
-      render :edit, status: :unprocessable_entity
+      @live_articles = @user.articles.where(status: 'published')
+      @draft_articles = @user.articles.where(status: 'draft').or(current_user.articles.where(status: nil))
+      render :show, status: :unprocessable_entity
     end
   end
 
   def show
     @user = User.find(params[:id])
-    @live_articles = current_user.articles.where(status: 'published')
-    @draft_articles = current_user.articles.where(status: 'draft').or(current_user.articles.where(status: nil))
+    puts "****PUTS******"
+    puts @user.articles.where(status: 'published')
+    @live_articles = @user.articles.where(status: 'published')
+    @draft_articles = @user.articles.where(status: 'draft').or(current_user.articles.where(status: nil))
 
-    puts "**********"
-    puts @live_articles
-    puts @draft_articles
   end
 
   private
