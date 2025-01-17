@@ -1,21 +1,23 @@
 # README
 
-** WIP **
+**** WIP ****
+
 Ruby on rails sticker blog
+
 Demo of the site can be viewed here: https://mysite-rcfp.onrender.com/
 
 - Ruby version
-  3.3.1
+  - `3.3.1`
 
 - Installing dependencies
-  `yarn install`
-  `bundle install`
+  - `yarn install`
+  - `bundle install`
 
 - Start local rails server
-  `bin/dev`
+  - `bin/dev`
 
 - Compile JS & CSS code
-  `yarn build --watch`
+  - `yarn build --watch`
 
 - System dependencies
 
