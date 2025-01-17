@@ -2,6 +2,7 @@
 
 ** WIP **
 Ruby on rails sticker blog
+Demo of the site can be viewed here: https://mysite-rcfp.onrender.com/
 
 - Ruby version
   3.3.1
