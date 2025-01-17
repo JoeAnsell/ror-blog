@@ -1,11 +1,20 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
+** WIP **
+Ruby on rails sticker blog
 
 - Ruby version
+  3.3.1
+
+- Installing dependencies
+  `yarn install`
+  `bundle install`
+
+- Start local rails server
+  `bin/dev`
+
+- Compile JS & CSS code
+  `yarn build --watch`
 
 - System dependencies
 
@@ -20,13 +29,3 @@ Things you may want to cover:
 - Services (job queues, cache servers, search engines, etc.)
 
 - Deployment instructions
-
-- ...
-
-Start rails server
-`bin/dev`
-
-Compile JS & CSS code
-`yarn build --watch`
-
-//
