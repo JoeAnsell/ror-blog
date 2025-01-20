@@ -92,7 +92,7 @@ config.action_mailer.smtp_settings = {
   port: 587,
   domain: 'localhost:3000',
   user_name: Rails.application.credentials.dig(:gmail, :user_name),
-  password: Rails.application.credentials.dig(:gmail, :password),
+  password: Rails.application.credentials.dig(:gmail, :app_password),
   authentication: 'plain',
   enable_starttls_auto: true
 }
