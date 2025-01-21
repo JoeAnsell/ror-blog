@@ -3,9 +3,12 @@
 <div class="container" data-controller="user">
 
     <div class="user-profile-container" id="user-profile-container">
-        <% if current_user.avatar? %>
-        <div class="mb-2 h-100 image">
+        <% if current_user.avatar.present? %>
+        <div class="mb-2 h-200 image">
             <%= cl_image_tag(@user.avatar, width: 100, class: "rounded-circle") %>
+            <%= form_for @user, url: delete_avatar_user_path(@user), class:"position-absolute top-0 end-0", method: :delete do %>
+            <%= submit_tag "X", class: "btn btn-danger" %>
+            <% end %>
         </div>
         <% end %>
 

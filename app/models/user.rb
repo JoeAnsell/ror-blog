@@ -4,8 +4,7 @@ class User < ApplicationRecord
   has_secure_password
 
   validates :user_name, uniqueness: true, unless: :password_reset?
-  validates :name, uniqueness: true, unless: :password_reset?
-  validates :avatar, presence: true, unless: :password_reset? 
+  validates :avatar, presence: false
 
   validates :email, presence: true, uniqueness: true
   normalizes :email, with: ->(email) {email.strip.downcase}
@@ -40,4 +39,6 @@ class User < ApplicationRecord
   def password_required?
     new_record? || password.present?
   end
+
+  
 end

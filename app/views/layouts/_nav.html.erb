@@ -8,7 +8,7 @@
             </ul>
         </div>
         <div class="d-flex gap-3">
-            <ul class="d-flex align-items-center justify-content-center mb-0 gap-3 ">
+            <ul class="d-none d-md-flex align-items-center justify-content-center mb-0 gap-3 ">
                 <li class="nav-item">
                     <%= link_to search_path, class: "search-icon nav-link" do %>
                     <i class="bi bi-search">Search</i>
@@ -35,18 +35,16 @@
                 </li>
                 <% else %>
                 <li class="nav-item ">
-                    <%= link_to "Sign Up", new_registration_path, class: "nav-link" %>
-                </li>
-                <li class="nav-item ">
-                    <%= link_to "Log In", new_session_path, class: "nav-link" %>
+                    <%= link_to "Sign in", new_session_path, class: "nav-link" %>
                 </li>
                 <% end %>
             </ul>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <button class="d-block d-md-none navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="d-block d-md-none offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <button type="button" class="position-absolute mt-3 me-3 top-0 end-0 btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 <div class="offcanvas-body ps-4 pt-4">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <% if user_signed_in? %>
@@ -61,10 +59,7 @@
                         </li>
                         <% else %>
                         <li class="nav-item ">
-                            <%= link_to "Sign Up", new_registration_path, class: "nav-link" %>
-                        </li>
-                        <li class="nav-item ">
-                            <%= link_to "Log In", new_session_path, class: "nav-link" %>
+                            <%= link_to "Sign in", new_session_path, class: "nav-link" %>
                         </li>
                         <% end %>
                     </ul>

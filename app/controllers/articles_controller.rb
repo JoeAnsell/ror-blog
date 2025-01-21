@@ -97,7 +97,7 @@ class ArticlesController < ApplicationController
    # Checks if a user is logged in
    def authenticate_user
     unless current_user
-      redirect_to new_session_path, alert: "Please log in to edit this article."
+      redirect_to new_session_path, alert: "Please sign in to edit this article."
     end
   end
 

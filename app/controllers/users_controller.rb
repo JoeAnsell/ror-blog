@@ -19,25 +19,32 @@ class UsersController < ApplicationController
       puts uploaded_image
       @user.avatar = uploaded_image['secure_url'] # Store the Cloudinary URL
     end
+    
 
     if @user.update(user_params.except(:avatar)) # Exclude :avatar from direct update
-      puts "***THIS THING IS WORKING***"
       @user.save # Save the updated avatar URL
       redirect_to @user, notice: 'User information was successfully updated.'
     else
       @live_articles = @user.articles.where(status: 'published')
-      @draft_articles = @user.articles.where(status: 'draft').or(current_user.articles.where(status: nil))
+      @draft_articles = @user.articles.where(status: 'draft').or(@user.articles.where(status: nil))
       render :show, status: :unprocessable_entity
     end
   end
 
   def show
     @user = User.find(params[:id])
-    puts "****PUTS******"
-    puts @user.articles.where(status: 'published')
     @live_articles = @user.articles.where(status: 'published')
-    @draft_articles = @user.articles.where(status: 'draft').or(current_user.articles.where(status: nil))
+    @draft_articles = @user.articles.where(status: 'draft').or(@user.articles.where(status: nil))
+  end
 
+  def delete_avatar
+    @user = User.find(params[:id])
+    @user.avatar = nil
+    if @user.save
+      redirect_to @user, notice: 'Avatar was successfully deleted.'
+    else
+      redirect_to @user, alert: 'Failed to delete avatar.'
+    end
   end
 
   private
