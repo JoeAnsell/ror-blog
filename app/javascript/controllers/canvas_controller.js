@@ -10,6 +10,7 @@ export default class extends Controller {
     }
 
     const stickerButton = document.querySelectorAll(".sticker-button");
+    const bgImgButton = document.querySelectorAll(".bg-img-button");
     const mouseSticker = document.getElementById("mouse-sticker");
     const saveButton = document.getElementById("save-button");
     const deleteButton = document.getElementById("delete-button");
@@ -21,6 +22,14 @@ export default class extends Controller {
     const decreaseStickerSize = document.getElementById(
       "decrease-sticker-size"
     );
+    const rotateCounterclockwise = document.getElementById(
+      "rotate-counterclockwise"
+    );
+    const rotateClockwise = document.getElementById("rotate-clockwise");
+    const setBackground = document.getElementById("set-background");
+    const stickerBgToggle = document.getElementById("sticker-bg-toggle");
+    const frogStickers = document.getElementById("frog-stickers");
+    const backgroundImages = document.getElementById("background-images");
 
     const canvasDataField = document.getElementById("canvas-data-field");
     const canvasImageField = document.getElementById("canvas-image-field");
@@ -138,6 +147,79 @@ export default class extends Controller {
       }
     };
 
+    const handleRotateClockwise = () => {
+      const activeObject = canvas.getActiveObject();
+
+      // Check if an object is selected
+      if (activeObject) {
+        // Get the current angle and add 90 degrees
+        let currentAngle = activeObject.angle || 0;
+        activeObject.rotate(currentAngle + 90);
+
+        // Re-render the canvas to show changes
+        canvas.renderAll();
+      } else {
+        alert("Please select an object to rotate.");
+      }
+    };
+
+    const handleRotateCounterClockwise = () => {
+      const activeObject = canvas.getActiveObject();
+
+      // Check if an object is selected
+      if (activeObject) {
+        // Get the current angle and add 90 degrees
+        let currentAngle = activeObject.angle || 0;
+        activeObject.rotate(currentAngle - 90);
+
+        // Re-render the canvas to show changes
+        canvas.renderAll();
+      } else {
+        alert("Please select an object to rotate.");
+      }
+    };
+
+    const setBackgroundImage = (imageURL) => {
+      console.log("canvas.width", canvas.width);
+      console.log("canvas.width", canvas.width);
+      fabric.Image.fromURL("/lilypads.jpg", function (img) {
+        let canvasWidth = canvas.width;
+        let canvasHeight = canvas.height;
+
+        // Get the original image dimensions
+        let imgWidth = img.width;
+        let imgHeight = img.height;
+
+        // Calculate scale while maintaining aspect ratio
+        let scale = Math.max(canvasWidth / imgWidth, canvasHeight / imgHeight);
+
+        // Set background image with calculated scale
+        canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
+          scaleX: scale,
+          scaleY: scale,
+          originX: "center",
+          originY: "center",
+          left: canvasWidth / 2, // Center the image
+          top: canvasHeight / 2,
+        });
+      });
+    };
+
+    const handleStickerBgToggle = () => {
+      const stickerBgToggle = document.getElementById("sticker-bg-toggle");
+      if (stickerBgToggle.getAttribute("data-current") === "sticker") {
+        stickerBgToggle.setAttribute("data-current", "background");
+        stickerBgToggle.innerText = "Backgrounds";
+        frogStickers.classList.remove("d-none");
+        backgroundImages.classList.add("d-none");
+      } else {
+        stickerBgToggle.setAttribute("data-current", "sticker");
+        stickerBgToggle.innerText = "Stickers";
+        frogStickers.classList.add("d-none");
+        backgroundImages.classList.remove("d-none");
+      }
+    };
+
     // ------------ End of Contol functions -------------//
 
     canvasContainer.addEventListener("mousemove", (event) => {
@@ -162,6 +244,12 @@ export default class extends Controller {
       button.addEventListener("click", (event) => {
         const newImage = (button.querySelector("img").src = event.target.src);
         mouseSticker.src = newImage;
+      });
+    });
+
+    bgImgButton.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        console.log("clicked");
       });
     });
 
@@ -219,11 +307,26 @@ export default class extends Controller {
       handleDecreaseMouseStickerSize();
     });
 
+    rotateCounterclockwise.addEventListener("click", function () {
+      handleRotateCounterClockwise();
+    });
+
+    rotateClockwise.addEventListener("click", function () {
+      handleRotateClockwise();
+    });
+
+    setBackground.addEventListener("click", function () {
+      setBackgroundImage();
+    });
+
+    stickerBgToggle.addEventListener("click", function () {
+      handleStickerBgToggle();
+    });
+
     //------------ End of Button Events -------------//
 
     //------------ Keyboard Events -------------//
     window.addEventListener("keydown", (event) => {
-      console.log("event", event.key);
       if (event.key === "Backspace") {
         deleteImage();
       }
