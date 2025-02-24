@@ -5,6 +5,7 @@ import { fabric } from "fabric"; // browser
 export default class extends Controller {
   connect() {
     const canvasContainer = document.getElementById("canvas-container");
+    console.log("canvasContainer", canvasContainer);
     if (!canvasContainer) {
       return;
     }
@@ -26,7 +27,6 @@ export default class extends Controller {
       "rotate-counterclockwise"
     );
     const rotateClockwise = document.getElementById("rotate-clockwise");
-    const setBackground = document.getElementById("set-background");
     const stickerBgToggle = document.getElementById("sticker-bg-toggle");
     const frogStickers = document.getElementById("frog-stickers");
     const backgroundImages = document.getElementById("background-images");
@@ -180,9 +180,8 @@ export default class extends Controller {
     };
 
     const setBackgroundImage = (imageURL) => {
-      console.log("canvas.width", canvas.width);
-      console.log("canvas.width", canvas.width);
-      fabric.Image.fromURL("/lilypads.jpg", function (img) {
+      console.log("setBackgroundImage", imageURL);
+      fabric.Image.fromURL(imageURL, function (img) {
         let canvasWidth = canvas.width;
         let canvasHeight = canvas.height;
 
@@ -210,15 +209,17 @@ export default class extends Controller {
       if (stickerBgToggle.getAttribute("data-current") === "sticker") {
         stickerBgToggle.setAttribute("data-current", "background");
         stickerBgToggle.innerText = "Backgrounds";
-        frogStickers.classList.remove("d-none");
-        backgroundImages.classList.add("d-none");
+        backgroundImages.setAttribute("class", "d-none flex-column");
+        frogStickers.setAttribute("class", "d-flex flex-column");
       } else {
         stickerBgToggle.setAttribute("data-current", "sticker");
         stickerBgToggle.innerText = "Stickers";
-        frogStickers.classList.add("d-none");
-        backgroundImages.classList.remove("d-none");
+        frogStickers.setAttribute("class", "d-none flex-column");
+        backgroundImages.setAttribute("class", "d-flex flex-column");
       }
     };
+
+    handleStickerBgToggle();
 
     // ------------ End of Contol functions -------------//
 
@@ -249,12 +250,11 @@ export default class extends Controller {
 
     bgImgButton.forEach((button) => {
       button.addEventListener("click", (event) => {
-        console.log("clicked");
+        setBackgroundImage(event.target.src);
       });
     });
 
     stickerSize.addEventListener("input", function (e) {
-      console.log(e.target.value);
       imageSize = e.target.value;
       mouseSticker.style.height = `${imageSize}px`;
     });
@@ -264,6 +264,7 @@ export default class extends Controller {
     canvas.on("mouse:dblclick", addImage);
 
     canvasContainer.addEventListener("click", (event) => {
+      event.target.setAttribute("data-active", "true");
       mouseSticker.style.opacity = 0.25;
     });
 
@@ -313,10 +314,6 @@ export default class extends Controller {
 
     rotateClockwise.addEventListener("click", function () {
       handleRotateClockwise();
-    });
-
-    setBackground.addEventListener("click", function () {
-      setBackgroundImage();
     });
 
     stickerBgToggle.addEventListener("click", function () {

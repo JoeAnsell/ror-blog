@@ -3,7 +3,7 @@
     <button type="button" data-current="sticker" id="sticker-bg-toggle" class="mb-2 btn btn-primary">Backgrounds</i></button>
     <div class="d-flex flex-row gap-2 pb-4" style="height:75vh;">
         <div class="canvas-button-container pb-2 gap-1 overflow-auto d-flex flex-column">
-            <div class="d-flex flex-column" id="frog-stickers">
+            <div class="d-none flex-column" id="frog-stickers">
                 <% Dir.glob("#{Rails.root}/public/frogs/*").each do |image_path| %>
                 <% image_file = File.basename(image_path) %>
                 <button type="button" class="mb-2 border sticker-button p-2 rounded-1" id="<%= image_file.chomp(File.extname(image_file)) %>-sticker">
@@ -11,17 +11,17 @@
                 </button>
                 <% end %>
             </div>
-            <div class="d-none flex-column" id="background-images">
+            <div class="d-flex flex-column" id="background-images">
                 <% Dir.glob("#{Rails.root}/public/background-images/*").each do |image_path| %>
                 <% image_file = File.basename(image_path) %>
-                <button type="button" class="border p-2 rounded-1" id="<%= image_file.chomp(File.extname(image_file)) %>-sticker">
+                <button type="button" class="bg-img-button p-2 rounded-1" id="<%= image_file.chomp(File.extname(image_file)) %>-sticker">
                     <img src="/background-images/<%= image_file %>" alt="<%= image_path %>" width="75" height="75">
                 </button>
                 <% end %>
             </div>
         </div>
 
-        <div data-controller="canvas" id="canvas-container" class="canvas-container" style="width: 100%;">
+        <div data-active="false" data-controller="canvas" id="canvas-container" class="canvas-container" style="width: 100%;">
             <img class="position-absolute mouse-sticker" style="opacity: 0.25; pointer-events: none; " id="mouse-sticker" src="/frogs/frog1.png" alt="egg">
             <canvas class="rounded-1 border" id="fabricCanvas" width="100%" height="100%"></canvas>
         </div>
@@ -48,9 +48,6 @@
         </li>
         <li>
             <button title="Rotate sticker clockwise" type="button" id="rotate-clockwise" class="sticker-btn mb-4 btn btn-primary"><i class="bi bi-arrow-clockwise"></i></button>
-        </li>
-        <li>
-            <button title="Rotate sticker clockwise" type="button" id="set-background" class="sticker-btn mb-4 btn btn-primary">Set Background</button>
         </li>
     </ul>
 </div>
