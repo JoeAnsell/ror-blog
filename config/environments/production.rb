@@ -76,7 +76,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
 
 # Specify default URL options for Action Mailer
-config.action_mailer.default_url_options = { host: 'https://mysite-rcfp.onrender.com/' } 
+config.action_mailer.default_url_options = { host: 'mysite-rcfp.onrender.com/' } 
 
 # SMTP settings for Gmail (or another provider)
 config.action_mailer.smtp_settings = {
