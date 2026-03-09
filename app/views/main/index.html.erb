@@ -2,6 +2,16 @@
 
 <h1 class="mb-5">Frogs Frogs Frogs</h1>
 
+<% if user_signed_in? %>
+    <div class="mt-7 mb-6 container">
+        <%= link_to "Make Frogs!", new_article_path, class: "btn btn-primary w-50 d-block mx-auto" %>
+    </div>
+<% else %>
+    <div class="mt-7 mb-6 container">
+        <%= link_to "Sign Up Make Frogs!", new_registration_path, class: "btn btn-primary w-50 d-block mx-auto" %>
+    </div>
+<% end %>
+
 <div class="container">
     <%= render partial: 'shared/articles_list', locals: { articles: @articles } %>
 </div>
